@@ -1,0 +1,62 @@
+import React, { useRef } from "react";
+import { formatTime } from "../lib/time";
+
+export function Header({
+  board,
+  theme,
+  onToggleTheme,
+  onNewTier,
+  onExport,
+  onImportFile,
+  onCopy,
+  onPasteOpen,
+}) {
+  const fileRef = useRef(null);
+
+  return (
+    <div className="card header">
+      <div className="row space">
+        <div>
+          <div className="h1">{board.yearLabel}</div>
+          <div className="muted">
+            Local save • Last change: {formatTime(board.updatedAt)}
+          </div>
+        </div>
+
+        <div className="row" style={{ gap: 8 }}>
+          <button className="btn" onClick={onToggleTheme}>
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
+          <button className="btn" onClick={onNewTier}>+ Tier</button>
+        </div>
+      </div>
+
+      <div className="hr" />
+
+      <div className="row" style={{ flexWrap: "wrap" }}>
+        <button className="btn" onClick={onExport}>Export JSON</button>
+
+        <button
+          className="btn"
+          onClick={() => fileRef.current?.click()}
+        >
+          Import JSON
+        </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json"
+          style={{ display: "none" }}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) onImportFile(file);
+            e.target.value = "";
+          }}
+        />
+
+        <button className="btn" onClick={onCopy}>Copy Board</button>
+        <button className="btn" onClick={onPasteOpen}>Paste Board</button>
+      </div>
+    </div>
+  );
+}
