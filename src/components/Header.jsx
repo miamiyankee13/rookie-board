@@ -9,6 +9,7 @@ export function Header({
   onImportFile,
   onCopy,
   onPasteOpen,
+  onResetBoard,
 }) {
   const fileRef = useRef(null);
 
@@ -52,6 +53,10 @@ export function Header({
 
         <button className="btn" onClick={onCopy}>Copy Board</button>
         <button className="btn" onClick={onPasteOpen}>Paste Board</button>
+
+        <button className="btn" onClick={onResetBoard} title="Resets local board only">
+          Reset Board
+        </button>
       </div>
     </div>
   );

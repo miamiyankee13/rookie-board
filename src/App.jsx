@@ -206,9 +206,9 @@ export default function App() {
     }
   };
 
-  const resetToSample = () => {
+  const resetBoard = () => {
     setBoard(makeSampleBoard());
-    setToast("Reset to Sample Board");
+    setToast("Reset Board");
   };
 
   return (
@@ -222,6 +222,7 @@ export default function App() {
         onImportFile={doImportFile}
         onCopy={doCopy}
         onPasteOpen={() => setPasteOpen(true)}
+        onResetBoard={resetBoard}
       />
 
       <div style={{ height: 12 }} />
@@ -229,11 +230,6 @@ export default function App() {
       <div className="card" style={{ padding: 12 }}>
         <div className="row space">
           <Tabs tabs={tabs} active={tab} onChange={setTab} />
-          <div className="row">
-            <button className="btn" onClick={resetToSample} title="Resets local board only">
-              Reset Sample
-            </button>
-          </div>
         </div>
       </div>
 
