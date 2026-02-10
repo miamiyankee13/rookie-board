@@ -190,6 +190,38 @@ a { color: inherit; }
   }
 }
 
+/* Mobile density pass (iPhone) */
+@media (max-width: 520px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 12px;
+  }
+
+  .header .h1 {
+    font-size: 16px;
+  }
+
+  /* Make header buttons feel less chunky */
+  .header .btn {
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  /* Tighten spacing in header rows */
+  .header .row {
+    gap: 6px;
+  }
+
+  /* Slightly reduce the divider spacing */
+  .header .hr {
+    margin: 10px 0;
+  }
+}
+
 .tab {
   border: 1px solid var(--border);
   background: transparent;
