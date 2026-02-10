@@ -99,6 +99,10 @@ a { color: inherit; }
 .btn:hover { border-color: rgba(122,162,255,0.35); }
 .btn.primary { background: rgba(122,162,255,0.14); border-color: rgba(122,162,255,0.35); }
 
+.btn:active {
+  transform: translateY(1px);
+}
+
 .input, .select, .textarea {
   width: 100%;
   border: 1px solid var(--border);
@@ -175,7 +179,17 @@ a { color: inherit; }
   padding: 6px 10px;
   font-size: 13px;
   cursor: pointer;
-  font-weight: 600; /* lock weight */
+  font-weight: 600;
+  transition:
+  transform 60ms ease,
+  background-color 120ms ease,
+  color 120ms ease,
+  border-color 120ms ease;
+-webkit-tap-highlight-color: transparent; 
+}
+
+.tab:active {
+  transform: translateY(1px);
 }
 
 .tab-big-board[data-active="true"] {
@@ -184,7 +198,6 @@ a { color: inherit; }
   color: var(--pill-roster-fg);
 }
 
-/* Position-themed active tabs (match depth chart groupTheme) */
 .tab-qb[data-active="true"] {
   border-color: color-mix(in oklab, var(--pill-qb-fg) 55%, transparent);
   background: var(--pill-qb-bg);
