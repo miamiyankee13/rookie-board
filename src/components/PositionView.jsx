@@ -161,10 +161,10 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 <span className="posMetaText">#{r.overallRank}</span>
               </div>
 
-              <div className="posFields">
+              <div className={`posFields ${showRP ? "posFields--wr" : "posFields--std"}`}>
                 {showRP && (
                   <input
-                    className="input"
+                    className="input rpInput"
                     value={r.player.posMeta?.RP ?? ""}
                     onChange={(e) =>
                       onUpdatePlayer(r.player.id, {
@@ -176,7 +176,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 )}
 
                 <input
-                  className="input"
+                  className="input zapInput"
                   value={r.player.posMeta?.ZAP ?? ""}
                   onChange={(e) =>
                     onUpdatePlayer(r.player.id, {
@@ -187,7 +187,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 />
 
                 <input
-                  className="input"
+                  className="input categoryInput"
                   value={r.player.posMeta?.Category ?? ""}
                   onChange={(e) =>
                     onUpdatePlayer(r.player.id, {
