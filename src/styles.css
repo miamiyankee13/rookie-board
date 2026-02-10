@@ -372,6 +372,52 @@ a { color: inherit; }
   padding-right: 8px;
 }
 
+/* Player row: mobile reflow to prevent cramped desktop grid */
+.playerRowMeta {
+  display: contents; /* desktop: keep existing grid columns behavior */
+}
+
+@media (max-width: 520px) {
+  .playerRow {
+    grid-template-columns: 24px 28px max-content 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+  }
+
+  /* Ensure the name input can actually shrink instead of forcing overflow */
+  .nameInput {
+    min-width: 0;
+    max-width: none;
+  }
+
+  /* Move POS select + actions to a second line */
+  .playerRowMeta {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  /* Make the select not feel tiny on iPhone */
+  .playerRowMeta .select {
+    width: auto;
+    min-width: 96px;
+  }
+
+  /* Bigger tap targets (without changing the visual too much) */
+  .iconBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dragHandle {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .smallActions {
   display: flex;
   gap: 8px;

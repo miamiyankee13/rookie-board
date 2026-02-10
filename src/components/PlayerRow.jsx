@@ -39,20 +39,22 @@ export function PlayerRow({
         placeholder="Player"
       />
 
-      <select
-        className="select"
-        value={player.pos}
-        onChange={(e) => onUpdatePlayer(id, { pos: e.target.value })}
-      >
-        <option value="QB">QB</option>
-        <option value="RB">RB</option>
-        <option value="WR">WR</option>
-        <option value="TE">TE</option>
-      </select>
+      <div className="playerRowMeta">
+        <select
+          className="select"
+          value={player.pos}
+          onChange={(e) => onUpdatePlayer(id, { pos: e.target.value })}
+        >
+          <option value="QB">QB</option>
+          <option value="RB">RB</option>
+          <option value="WR">WR</option>
+          <option value="TE">TE</option>
+        </select>
 
-      <div className="smallActions">
-        <button className="iconBtn" onClick={() => onOpenNotes(id)} title="Notes">📝</button>
-        <button className="iconBtn" onClick={() => onDeletePlayer(id)} title="Delete">🗑</button>
+        <div className="smallActions">
+          <button className="iconBtn" onClick={() => onOpenNotes(id)} title="Notes">📝</button>
+          <button className="iconBtn" onClick={() => onDeletePlayer(id)} title="Delete">🗑</button>
+        </div>
       </div>
     </div>
   );
