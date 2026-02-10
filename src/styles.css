@@ -628,23 +628,18 @@ a { color: inherit; }
     grid-template-columns: 92px 1fr;
   }
 
-  /* WR: RP + ZAP first row, Category full width second row */
+  /* WR: RP + ZAP first row, Category full width below */
   .posFields.posFields--wr {
     display: grid;
-    grid-template-columns: 74px 92px;
+    grid-template-columns: 74px 92px 1fr; /* allow the grid to expand */
     grid-template-areas:
-      "rp  zap"
-      "cat cat";
+      "rp  zap  ."
+      "cat cat  cat";
     gap: 8px;
   }
 
-  .posFields.posFields--wr .rpInput {
-    grid-area: rp;
-  }
-
-  .posFields.posFields--wr .zapInput {
-    grid-area: zap;
-  }
+  .posFields.posFields--wr .rpInput { grid-area: rp; }
+  .posFields.posFields--wr .zapInput { grid-area: zap; }
 
   .posFields.posFields--wr .categoryInput {
     grid-area: cat;
