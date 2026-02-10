@@ -441,20 +441,94 @@ a { color: inherit; }
   border-collapse: separate;
   border-spacing: 0 8px;
 }
+
 .th {
   text-align: left;
   font-size: 12px;
   color: var(--muted);
   padding: 6px 8px;
 }
+
 .td {
   background: var(--panel2);
   border: 1px solid var(--border);
   padding: 8px 8px;
   font-size: 13px;
 }
+
 .tr td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
 .tr td:last-child  { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+.tableWrap {
+  width: 100%;
+}
+
+/* Position table mobile ergonomics */
+@media (max-width: 520px) {
+  .positionTable .th,
+  .positionTable .td {
+    padding: 6px 6px;
+    font-size: 12px;
+  }
+
+  /* iOS Safari: prevent auto-zoom on input focus */
+  .positionTable .input,
+  .positionTable .select,
+  .positionTable button {
+    font-size: 16px;
+  }
+
+
+  /* Keep tier text from forcing width */
+  .positionTable .colTier {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Slightly tighter player cell */
+  .positionTable .colPlayer .row {
+    gap: 8px !important;
+  }
+
+  /* Keep notes button from feeling huge */
+  .positionTable .colNotes .btn {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  /* hide the 6th column (Category) in the row/headers too */
+  .positionTable th:nth-child(6),
+  .positionTable td:nth-child(6) {
+    display: none;
+  }
+}
+
+/* Ensure table inputs don't collapse into ellipses */
+.positionTable .td {
+  overflow: visible;
+}
+
+/* Position tables: lock column sizing so inputs don't collapse */
+.positionTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.positionTable col.colTier { width: 140px; }
+.positionTable col.colRank { width: 70px; }
+.positionTable col.colPlayer { width: auto; }
+.positionTable col.colRP { width: 90px; }
+.positionTable col.colZAP { width: 110px; }
+.positionTable col.colCategory { width: 220px; }
+.positionTable col.colNotes { width: 90px; }
+
+/* Make sure inputs behave in fixed-layout cells */
+.positionTable .input {
+  width: 100%;
+  min-width: 0;
+}
 
 .positionTable .th {
   text-align: center;

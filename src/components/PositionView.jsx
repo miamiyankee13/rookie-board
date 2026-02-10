@@ -38,7 +38,18 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
         </div>
       </div>
 
+    <div className="tableWrap">
       <table className="table positionTable">
+        <colgroup>
+          <col className="colTier" />
+          <col className="colRank" />
+          <col className="colPlayer" />
+          {showRP && <col className="colRP" />}
+          <col className="colZAP" />
+          <col className="colCategory" />
+          <col className="colNotes" />
+        </colgroup>
+
         <thead>
           <tr>
             <th className="th">Tier</th>
@@ -50,11 +61,16 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
             <th className="th">Notes</th>
           </tr>
         </thead>
+
         <tbody>
           {rows.map((r) => (
             <tr className="tr" key={r.player.id}>
               <td className="td">{r.tierTitle}</td>
-              <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>#{r.overallRank}</td>
+
+              <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>
+                #{r.overallRank}
+              </td>
+
               <td className="td playerCol">
                 <div className="row" style={{ gap: 10 }}>
                   <span className={`pill ${posClass(position)}`}>{position}</span>
@@ -63,7 +79,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
               </td>
 
               {showRP && (
-                <td className="td" style={{ width: 90 }}>
+                <td className="td">
                   <input
                     className="input"
                     value={r.player.posMeta?.RP ?? ""}
@@ -77,7 +93,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 </td>
               )}
 
-              <td className="td" style={{ width: 110 }}>
+              <td className="td">
                 <input
                   className="input"
                   value={r.player.posMeta?.ZAP ?? ""}
@@ -90,7 +106,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 />
               </td>
 
-              <td className="td" style={{ width: 220 }}>
+              <td className="td">
                 <input
                   className="input"
                   value={r.player.posMeta?.Category ?? ""}
@@ -103,13 +119,16 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 />
               </td>
 
-              <td className="td" style={{ width: 90 }}>
-                <button className="btn" onClick={() => onOpenNotes(r.player.id)}>Edit</button>
+              <td className="td">
+                <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
 
       {rows.length === 0 && (
         <div className="muted" style={{ padding: 10 }}>
