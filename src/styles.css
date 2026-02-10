@@ -551,6 +551,65 @@ a { color: inherit; }
   text-align: left;
 }
 
+/* PositionView responsive switch */
+.posMobile { display: none; }
+.posDesktop { display: block; }
+
+@media (max-width: 520px) {
+  .posDesktop { display: none; }
+  .posMobile { display: block; }
+}
+
+/* Mobile position cards */
+.posCard {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.posTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.posName {
+  font-weight: 800;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.posMetaLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.posMetaDot { opacity: 0.7; }
+
+.posFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* iOS: prevent zoom on focus (mobile cards only) */
+@media (max-width: 520px) {
+  .posFields .input,
+  .posFields .select,
+  .posTop .btn {
+    font-size: 16px;
+  }
+}
+
 .drawerOverlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.45);

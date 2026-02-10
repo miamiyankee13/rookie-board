@@ -38,48 +38,131 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
         </div>
       </div>
 
-    <div className="tableWrap">
-      <table className="table positionTable">
-        <colgroup>
-          <col className="colTier" />
-          <col className="colRank" />
-          <col className="colPlayer" />
-          {showRP && <col className="colRP" />}
-          <col className="colZAP" />
-          <col className="colCategory" />
-          <col className="colNotes" />
-        </colgroup>
+      {/* Desktop/tablet table */}
+      <div className="posDesktop">
+        <div className="tableWrap">
+          <table className="table positionTable">
+            <colgroup>
+              <col className="colTier" />
+              <col className="colRank" />
+              <col className="colPlayer" />
+              {showRP && <col className="colRP" />}
+              <col className="colZAP" />
+              <col className="colCategory" />
+              <col className="colNotes" />
+            </colgroup>
 
-        <thead>
-          <tr>
-            <th className="th">Tier</th>
-            <th className="th">Rank</th>
-            <th className="th">Player</th>
-            {showRP && <th className="th">RP</th>}
-            <th className="th">ZAP</th>
-            <th className="th">Category</th>
-            <th className="th">Notes</th>
-          </tr>
-        </thead>
+            <thead>
+              <tr>
+                <th className="th">Tier</th>
+                <th className="th">Rank</th>
+                <th className="th">Player</th>
+                {showRP && <th className="th">RP</th>}
+                <th className="th">ZAP</th>
+                <th className="th">Category</th>
+                <th className="th">Notes</th>
+              </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
+              {rows.map((r) => (
+                <tr className="tr" key={r.player.id}>
+                  <td className="td">{r.tierTitle}</td>
+
+                  <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>
+                    #{r.overallRank}
+                  </td>
+
+                  <td className="td playerCol">
+                    <div className="row" style={{ gap: 10 }}>
+                      <span className={`pill ${posClass(position)}`}>{position}</span>
+                      <span style={{ fontWeight: 700 }}>{r.player.name}</span>
+                    </div>
+                  </td>
+
+                  {showRP && (
+                    <td className="td">
+                      <input
+                        className="input"
+                        value={r.player.posMeta?.RP ?? ""}
+                        onChange={(e) =>
+                          onUpdatePlayer(r.player.id, {
+                            posMeta: { ...(r.player.posMeta ?? {}), RP: e.target.value },
+                          })
+                        }
+                        placeholder="RP"
+                      />
+                    </td>
+                  )}
+
+                  <td className="td">
+                    <input
+                      className="input"
+                      value={r.player.posMeta?.ZAP ?? ""}
+                      onChange={(e) =>
+                        onUpdatePlayer(r.player.id, {
+                          posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
+                        })
+                      }
+                      placeholder="ZAP"
+                    />
+                  </td>
+
+                  <td className="td">
+                    <input
+                      className="input"
+                      value={r.player.posMeta?.Category ?? ""}
+                      onChange={(e) =>
+                        onUpdatePlayer(r.player.id, {
+                          posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
+                        })
+                      }
+                      placeholder="Category"
+                    />
+                  </td>
+
+                  <td className="td">
+                    <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {rows.length === 0 && (
+          <div className="muted" style={{ padding: 10 }}>
+            No {position} players yet.
+          </div>
+        )}
+      </div>
+
+      {/* Mobile cards */}
+      <div className="posMobile">
+        <div style={{ display: "grid", gap: 10, marginTop: 8 }}>
           {rows.map((r) => (
-            <tr className="tr" key={r.player.id}>
-              <td className="td">{r.tierTitle}</td>
-
-              <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>
-                #{r.overallRank}
-              </td>
-
-              <td className="td playerCol">
-                <div className="row" style={{ gap: 10 }}>
+            <div className="posCard" key={r.player.id}>
+              <div className="posTop">
+                <div className="row" style={{ gap: 8, minWidth: 0 }}>
                   <span className={`pill ${posClass(position)}`}>{position}</span>
-                  <span style={{ fontWeight: 700 }}>{r.player.name}</span>
+                  <div className="posName">{r.player.name || "Unnamed"}</div>
                 </div>
-              </td>
 
-              {showRP && (
-                <td className="td">
+                <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
+                  Notes
+                </button>
+              </div>
+
+              <div className="posMetaLine">
+                <span className="posMetaText">{r.tierTitle}</span>
+                <span className="posMetaDot">•</span>
+                <span className="posMetaText">#{r.overallRank}</span>
+              </div>
+
+              <div className="posFields">
+                {showRP && (
                   <input
                     className="input"
                     value={r.player.posMeta?.RP ?? ""}
@@ -90,10 +173,8 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                     }
                     placeholder="RP"
                   />
-                </td>
-              )}
+                )}
 
-              <td className="td">
                 <input
                   className="input"
                   value={r.player.posMeta?.ZAP ?? ""}
@@ -104,9 +185,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                   }
                   placeholder="ZAP"
                 />
-              </td>
 
-              <td className="td">
                 <input
                   className="input"
                   value={r.player.posMeta?.Category ?? ""}
@@ -117,24 +196,17 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                   }
                   placeholder="Category"
                 />
-              </td>
-
-              <td className="td">
-                <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
-                  Edit
-                </button>
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
-    </div>
-
-      {rows.length === 0 && (
-        <div className="muted" style={{ padding: 10 }}>
-          No {position} players yet.
         </div>
-      )}
+
+        {rows.length === 0 && (
+          <div className="muted" style={{ padding: 10 }}>
+            No {position} players yet.
+          </div>
+        )}
+      </div>
     </div>
   );
 }
