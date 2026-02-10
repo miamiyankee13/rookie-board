@@ -168,7 +168,26 @@ a { color: inherit; }
 .tabs {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* desktop/tablet default */
+}
+
+/* Mobile: tabs stay on one row + scroll horizontally */
+@media (max-width: 520px) {
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ensure buttons don't shrink weirdly */
+  .tab {
+    flex: 0 0 auto;
+  }
 }
 
 .tab {
