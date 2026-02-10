@@ -525,13 +525,29 @@ a { color: inherit; }
   width: 100%;
 }
 
-.positionTable col.colTier { width: 140px; }
-.positionTable col.colRank { width: 70px; }
-.positionTable col.colPlayer { width: 240px;}
-.positionTable col.colRP { width: 90px; }
-.positionTable col.colZAP { width: 110px; }
-.positionTable col.colCategory { width: 220px; }
-.positionTable col.colNotes { width: 90px; }
+.positionTable col.colTier { width: 120px; }
+.positionTable col.colRank { width: 64px; }
+.positionTable col.colPlayer { width: auto;}
+.positionTable col.colRP { width: 80px; }
+.positionTable col.colZAP { width: 96px; }
+.positionTable col.colCategory { width: 180px; }
+.positionTable col.colNotes { width: 84px; }
+
+/* Desktop: keep player name from forcing overflow */
+.positionTable .td.playerCol {
+  overflow: hidden;
+}
+
+.positionTable .td.playerCol .row {
+  min-width: 0;
+}
+
+.positionTable .td.playerCol .row > span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* Make sure inputs behave in fixed-layout cells */
 .positionTable .input {
