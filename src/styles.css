@@ -399,6 +399,18 @@ a { color: inherit; }
     border-radius: 10px;
   }
 
+    /* Make the grip icon itself larger */
+  .dragHandle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* If the grip is text instead of SVG (safe to include) */
+  .dragHandle {
+    font-size: 22px;
+    line-height: 1;
+  }
+
   /* Keep 2nd line controls tucked under the content (not full-width right aligned) */
   .playerRowMeta {
     grid-column: 2 / -1;      /* <-- key change: start under rank, not col 1 */
