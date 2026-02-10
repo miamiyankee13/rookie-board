@@ -64,7 +64,7 @@ export default function App() {
   const deleteTier = (tierId) => {
     setBoard((b) => {
       if (b.tiers.length <= 1) {
-        setToast("Need at least one tier.");
+        setToast("Need at Least One Tier");
         return b;
       }
       // Move players to previous tier (or next if first)
@@ -116,7 +116,7 @@ export default function App() {
       ),
       updatedAt: Date.now(),
     }));
-    setToast("Player added.");
+    setToast("Player Added");
   };
 
   const updatePlayer = (playerId, patch) => {
@@ -142,7 +142,7 @@ export default function App() {
 
       return { ...b, players: newPlayers, tiers: newTiers, updatedAt: Date.now() };
     });
-    setToast("Player removed.");
+    setToast("Player Removed");
   };
 
   const openNotes = (playerId) => {
@@ -163,7 +163,7 @@ export default function App() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-    setToast("Exported JSON.");
+    setToast("Exported JSON");
   };
 
   const doImportFile = async (file) => {
@@ -171,22 +171,22 @@ export default function App() {
       const text = await file.text();
       const parsed = JSON.parse(text);
       if (!parsed || parsed.version !== 1 || !parsed.tiers || !parsed.players) {
-        setToast("Invalid board JSON.");
+        setToast("Invalid JSON");
         return;
       }
       setBoard({ ...parsed, updatedAt: Date.now() });
-      setToast("Imported board.");
+      setToast("Imported JSON");
     } catch {
-      setToast("Import failed.");
+      setToast("Import Failed");
     }
   };
 
   const doCopy = async () => {
     try {
       const ok = await copyText(JSON.stringify(board));
-      setToast(ok ? "Copied board JSON." : "Copy failed.");
+      setToast(ok ? "Copied Board" : "Copy Failed");
     } catch {
-      setToast("Copy failed.");
+      setToast("Copy Failed");
     }
   };
 
@@ -194,21 +194,21 @@ export default function App() {
     try {
       const parsed = JSON.parse(pasteText);
       if (!parsed || parsed.version !== 1 || !parsed.tiers || !parsed.players) {
-        setToast("Invalid JSON.");
+        setToast("Invalid JSON");
         return;
       }
       setBoard({ ...parsed, updatedAt: Date.now() });
       setPasteOpen(false);
       setPasteText("");
-      setToast("Pasted board applied.");
+      setToast("Pasted Board");
     } catch {
-      setToast("Invalid JSON.");
+      setToast("Invalid JSON");
     }
   };
 
   const resetToSample = () => {
     setBoard(makeSampleBoard());
-    setToast("Reset to sample board.");
+    setToast("Reset to Sample Board");
   };
 
   return (
@@ -230,7 +230,7 @@ export default function App() {
         <div className="row space">
           <Tabs tabs={tabs} active={tab} onChange={setTab} />
           <div className="row">
-            <button className="btn danger" onClick={resetToSample} title="Resets local board only">
+            <button className="btn" onClick={resetToSample} title="Resets local board only">
               Reset Sample
             </button>
           </div>
@@ -274,14 +274,13 @@ export default function App() {
           <div style={{ display: "grid", gap: 10 }}>
             <div className="row" style={{ gap: 10 }}>
               <span className={`pill ${activePlayer.pos.toLowerCase()}`}>{activePlayer.pos}</span>
-              <div className="muted">Notes are personal & manual (no data feeds).</div>
             </div>
 
             <textarea
               className="textarea"
               value={activePlayer.notes ?? ""}
               onChange={(e) => updatePlayer(activePlayer.id, { notes: e.target.value })}
-              placeholder="Short notes… (what you’d normally keep in your head or sheet)"
+              placeholder="Enter Notes"
             />
 
             <div className="row space">
@@ -289,14 +288,14 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className="muted">No player selected.</div>
+          <div className="muted">No Player Selected</div>
         )}
       </Drawer>
 
-      <Modal open={pasteOpen} title="Paste Board JSON" onClose={() => setPasteOpen(false)}>
+      <Modal open={pasteOpen} title="Paste Board (JSON)" onClose={() => setPasteOpen(false)}>
         <div style={{ display: "grid", gap: 10 }}>
           <div className="muted">
-            Paste a previously copied/exported board JSON. This will replace your current local board.
+            Paste a Previously Copied Board (JSON). This Will Replace Your Current Local Board.
           </div>
           <textarea
             className="textarea"

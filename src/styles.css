@@ -98,7 +98,6 @@ a { color: inherit; }
 }
 .btn:hover { border-color: rgba(122,162,255,0.35); }
 .btn.primary { background: rgba(122,162,255,0.14); border-color: rgba(122,162,255,0.35); }
-.btn.danger { border-color: rgba(255,107,107,0.35); background: rgba(255,107,107,0.10); }
 
 .input, .select, .textarea {
   width: 100%;
@@ -230,7 +229,7 @@ a { color: inherit; }
 
 .playerRow {
   display: grid;
-  grid-template-columns: 24px max-content max-content 1fr 92px 72px;
+  grid-template-columns: 24px 28px max-content 1fr 92px 72px;
   gap: 8px;
   align-items: center;
   padding: 8px 10px;
@@ -257,6 +256,9 @@ a { color: inherit; }
   color: var(--muted);
   font-size: 14px;
   font-weight: 600;
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .nameInputWrap {

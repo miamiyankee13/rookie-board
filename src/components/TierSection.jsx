@@ -46,7 +46,7 @@ export function TierSection({
             + Player
           </button>
           <button
-            className="btn danger"
+            className="btn"
             onClick={() => onDeleteTier(tier.id)}
             title="Delete tier"
           >

@@ -34,18 +34,15 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
     <div className="card" style={{ padding: 12 }}>
       <div className="row space">
         <div>
-          <div className="h1">{position} View</div>
-          <div className="muted">Annotated lens (does not affect tiers or ordering)</div>
+          <div className="muted">Edit Tier & Rank on Big Board</div>
         </div>
       </div>
-
-      <div className="hr" />
 
       <table className="table">
         <thead>
           <tr>
             <th className="th">Tier</th>
-            <th className="th">OVR</th>
+            <th className="th">Rank</th>
             <th className="th">Player</th>
             {showRP && <th className="th">RP</th>}
             <th className="th">ZAP</th>

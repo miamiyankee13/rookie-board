@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { formatTime } from "../lib/time";
 
 export function Header({
   board,
@@ -18,9 +17,6 @@ export function Header({
       <div className="row space">
         <div>
           <div className="h1">{board.yearLabel}</div>
-          <div className="muted">
-            Local save • Last change: {formatTime(board.updatedAt)}
-          </div>
         </div>
 
         <div className="row" style={{ gap: 8 }}>
