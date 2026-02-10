@@ -518,7 +518,7 @@ a { color: inherit; }
 
 .positionTable col.colTier { width: 140px; }
 .positionTable col.colRank { width: 70px; }
-.positionTable col.colPlayer { width: auto; }
+.positionTable col.colPlayer { width: auto; min-width: 200px; }
 .positionTable col.colRP { width: 90px; }
 .positionTable col.colZAP { width: 110px; }
 .positionTable col.colCategory { width: 220px; }
