@@ -315,6 +315,18 @@ a { color: inherit; }
 .tr td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
 .tr td:last-child  { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
 
+.positionTable .th {
+  text-align: center;
+}
+
+.positionTable .td {
+  text-align: center;
+}
+
+.positionTable .td.playerCol {
+  text-align: left;
+}
+
 .drawerOverlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.45);

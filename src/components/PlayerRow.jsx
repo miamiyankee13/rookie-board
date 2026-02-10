@@ -36,7 +36,7 @@ export function PlayerRow({
         className="input nameInput"
         value={player.name}
         onChange={(e) => onUpdatePlayer(id, { name: e.target.value })}
-        placeholder="Player name (freeform)"
+        placeholder="Player"
       />
 
       <select

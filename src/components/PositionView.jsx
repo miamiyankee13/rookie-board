@@ -38,7 +38,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
         </div>
       </div>
 
-      <table className="table">
+      <table className="table positionTable">
         <thead>
           <tr>
             <th className="th">Tier</th>
@@ -55,7 +55,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
             <tr className="tr" key={r.player.id}>
               <td className="td">{r.tierTitle}</td>
               <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>#{r.overallRank}</td>
-              <td className="td">
+              <td className="td playerCol">
                 <div className="row" style={{ gap: 10 }}>
                   <span className={`pill ${posClass(position)}`}>{position}</span>
                   <span style={{ fontWeight: 700 }}>{r.player.name}</span>
