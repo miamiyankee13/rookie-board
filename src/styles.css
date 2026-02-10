@@ -291,6 +291,37 @@ a { color: inherit; }
   max-width: 420px;
 }
 
+.tierInputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 520px) {
+  .tierHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tierInputs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Let title input fill width on mobile */
+  .tierInputs .input {
+    max-width: none !important;
+  }
+
+  /* Buttons row sits below inputs */
+  .tierHeader > .row {
+    justify-content: flex-end;
+  }
+}
+
 .playerRow {
   display: grid;
   grid-template-columns: 24px 28px max-content 1fr 92px 72px;

@@ -26,19 +26,21 @@ export function TierSection({
       }}
     >
       <div className="tierHeader">
-        <div className="tierTitleWrap" style={{ flex: 1 }}>
-          <input
-            className="input"
-            style={{ maxWidth: 220, fontWeight: 700 }}
-            value={tier.title}
-            onChange={(e) => onUpdateTier(tier.id, { title: e.target.value })}
-          />
-          <input
-            className="input tierNoteInput"
-            placeholder="Tier note (optional)"
-            value={tier.note ?? ""}
-            onChange={(e) => onUpdateTier(tier.id, { note: e.target.value })}
-          />
+        <div className="tierTitleWrap">
+          <div className="tierInputs">
+            <input
+              className="input"
+              style={{ maxWidth: 220, fontWeight: 700 }}
+              value={tier.title}
+              onChange={(e) => onUpdateTier(tier.id, { title: e.target.value })}
+            />
+            <input
+              className="input tierNoteInput"
+              placeholder="Tier note (optional)"
+              value={tier.note ?? ""}
+              onChange={(e) => onUpdateTier(tier.id, { note: e.target.value })}
+            />
+          </div>
         </div>
 
         <div className="row" style={{ gap: 8 }}>
