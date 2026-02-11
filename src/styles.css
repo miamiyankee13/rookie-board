@@ -676,14 +676,14 @@ a { color: inherit; }
 @media (max-width: 520px) {
 
   .posFields.posFields--std {
-    grid-template-columns: 92px 166px;
+    grid-template-columns: 83px 166px;
     justify-content: start;
   }
 
   /* WR: 2-column layout */
   .posFields.posFields--wr {
     display: grid;
-    grid-template-columns: 74px 92px;
+    grid-template-columns: 83px 83px;
     gap: 8px;
   }
 
