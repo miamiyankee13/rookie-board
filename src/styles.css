@@ -331,11 +331,6 @@ a { color: inherit; }
     gap: 8px;
     flex-shrink: 0;
   }
-
-  /* If wrapping happens, keep buttons aligned right */
-  .tierHeader > .row {
-    margin-left: auto;
-  }
 }
 
 .playerRow {
