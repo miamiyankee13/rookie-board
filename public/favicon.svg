@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Inner football seam only -->
+  <path d="M18 74
+           C26 50 42 36 64 36
+           C86 36 102 50 110 74
+           C102 94 86 108 64 108
+           C42 108 26 94 18 74 Z"
+        fill="none"
+        stroke="rgba(255,255,255,0.14)"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <!-- Refined laces -->
+  <path d="M50 40c9-3 19-3 28 0"
+        fill="none"
+        stroke="rgba(229,231,235,0.75)"
+        stroke-width="4"
+        stroke-linecap="round"/>
+
+  <g stroke="rgba(229,231,235,0.75)" stroke-width="3" stroke-linecap="round">
+    <path d="M54 38v8"/>
+    <path d="M60 36v10"/>
+    <path d="M66 36v10"/>
+    <path d="M72 36v10"/>
+    <path d="M78 38v8"/>
+  </g>
+
+  <!-- Bars (analytics) -->
+  <rect x="40" y="78" width="10" height="18" rx="2" fill="#38bdf8" opacity="0.55"/>
+  <rect x="54" y="70" width="10" height="26" rx="2" fill="#38bdf8" opacity="0.7"/>
+  <rect x="68" y="60" width="10" height="36" rx="2" fill="#38bdf8" opacity="0.85"/>
+  <rect x="82" y="50" width="10" height="46" rx="2" fill="#38bdf8"/>
+
+  <!-- Trend line -->
+  <path d="M34 88 L48 80 L62 72 L76 64 L90 54"
+        fill="none"
+        stroke="#38bdf8"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <circle cx="48" cy="80" r="4" fill="#38bdf8"/>
+  <circle cx="62" cy="72" r="4" fill="#38bdf8"/>
+  <circle cx="76" cy="64" r="4" fill="#38bdf8"/>
+</svg>

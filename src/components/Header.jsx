@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { RookieIcon } from "./RookieIcon";
 
 export function Header({
   board,
@@ -19,7 +20,8 @@ export function Header({
   return (
     <div className="card header">
       <div className="row space">
-        <div>
+        <div className="row" style={{ gap: 10 }}>
+          <RookieIcon size={34} />
           <div className="h1">{board.yearLabel}</div>
         </div>
 

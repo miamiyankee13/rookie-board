@@ -25,6 +25,11 @@
 
   --pill-roster-bg: #042f2e;
   --pill-roster-fg: #0f766e;
+
+  /* Rookie Board mark colors (dark) */
+  --rb-logo-accent: #38bdf8;
+  --rb-logo-band: rgba(229,231,235,0.70);
+  --rb-logo-stroke: rgba(255,255,255,0.18);
 }
 
 [data-theme="light"] {
@@ -52,6 +57,11 @@
 
   --pill-roster-bg: #ecfdf5;
   --pill-roster-fg: #0f766e;
+
+    /* Rookie Board mark colors (light) */
+  --rb-logo-accent: #0284c7;
+  --rb-logo-band: rgba(17,24,39,0.60);
+  --rb-logo-stroke: rgba(17,24,39,0.18);
 }
 
 * { box-sizing: border-box; }
