@@ -452,11 +452,13 @@ a { color: inherit; }
 
   /* Select lives on the left */
   .playerRowMeta .select {
-    width: 84px;        
-    min-width: 84px;    
+    width: 72px;        
+    min-width: 72px;    
     flex: 0 0 auto;     
     height: 34px;
     font-size: 16px;
+    text-align: center;
+    text-align-last: center;
   }
 
   /* Icons stay right aligned */
