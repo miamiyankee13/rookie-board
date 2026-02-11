@@ -18,10 +18,20 @@ const TAB_QB = "QB";
 const TAB_RB = "RB";
 const TAB_WR = "WR";
 const TAB_TE = "TE";
+const ACTIVE_TAB_KEY = "rookie_active_tab";
 
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("rookie_theme") || "dark");
-  const [tab, setTab] = useState(TAB_BIG);
+  const tabs = useMemo(() => [TAB_BIG, TAB_QB, TAB_RB, TAB_WR, TAB_TE], []);
+
+  const [tab, setTab] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACTIVE_TAB_KEY);
+      if (saved && tabs.includes(saved)) return saved;
+    } catch {}
+    return TAB_BIG;
+  });
+
   const [toast, setToast] = useState("");
 
   const [board, setBoard] = useState(() => loadBoard() || makeSampleBoard());
@@ -49,7 +59,11 @@ export default function App() {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const tabs = useMemo(() => [TAB_BIG, TAB_QB, TAB_RB, TAB_WR, TAB_TE], []);
+  useEffect(() => {
+    try {
+      localStorage.setItem(ACTIVE_TAB_KEY, tab);
+    } catch {}
+  }, [tab]);
 
   const updateBoard = (next) => setBoard(next);
 
