@@ -676,7 +676,7 @@ a { color: inherit; }
 @media (max-width: 520px) {
 
   .posFields.posFields--std {
-    grid-template-columns: 92px 74px;
+    grid-template-columns: 92px 166px;
     justify-content: start;
   }
 
