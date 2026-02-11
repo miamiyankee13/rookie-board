@@ -78,7 +78,7 @@ export function TierSection({
 
         {tier.playerIds.length === 0 && (
           <div className="muted" style={{ padding: "10px 12px" }}>
-            Empty tier — add a player.
+            Empty Tier
           </div>
         )}
       </div>
