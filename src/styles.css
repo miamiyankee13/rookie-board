@@ -675,9 +675,9 @@ a { color: inherit; }
 /* Mobile position card field sizing */
 @media (max-width: 520px) {
 
-  /* Standard (QB/RB/TE): ZAP fixed, Category flexible */
   .posFields.posFields--std {
-    grid-template-columns: 92px 1fr;
+    grid-template-columns: 92px 74px;
+    justify-content: start;
   }
 
   /* WR: 2-column layout */
