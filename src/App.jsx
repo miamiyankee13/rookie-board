@@ -223,6 +223,7 @@ export default function App() {
         onCopy={doCopy}
         onPasteOpen={() => setPasteOpen(true)}
         onResetBoard={resetBoard}
+        activeTab={tab}
       />
 
       <div style={{ height: 12 }} />

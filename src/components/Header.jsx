@@ -10,8 +10,11 @@ export function Header({
   onCopy,
   onPasteOpen,
   onResetBoard,
+  activeTab,
 }) {
   const fileRef = useRef(null);
+
+  const isBigBoard = activeTab === "Big Board";
 
   return (
     <div className="card header">
@@ -24,14 +27,21 @@ export function Header({
           <button className="btn" onClick={onToggleTheme} title="Toggle Theme">
             {theme === "dark" ? "Light" : "Dark"}
           </button>
-          <button className="btn" onClick={onNewTier} title="Add a Tier">+ Tier</button>
+
+          {isBigBoard && (
+            <button className="btn" onClick={onNewTier} title="Add a Tier">
+              + Tier
+            </button>
+          )}
         </div>
       </div>
 
       <div className="hr" />
 
       <div className="row" style={{ flexWrap: "wrap" }}>
-        <button className="btn" onClick={onExport} title="Export JSON File">Export JSON</button>
+        <button className="btn" onClick={onExport} title="Export JSON File">
+          Export JSON
+        </button>
 
         <button
           className="btn"
@@ -40,6 +50,7 @@ export function Header({
         >
           Import JSON
         </button>
+
         <input
           ref={fileRef}
           type="file"
@@ -52,8 +63,12 @@ export function Header({
           }}
         />
 
-        <button className="btn" onClick={onCopy} title="Copy JSON Board">Copy JSON</button>
-        <button className="btn" onClick={onPasteOpen} title="Paste JSON Board">Paste JSON</button>
+        <button className="btn" onClick={onCopy} title="Copy JSON Board">
+          Copy JSON
+        </button>
+        <button className="btn" onClick={onPasteOpen} title="Paste JSON Board">
+          Paste JSON
+        </button>
 
         <button className="btn" onClick={onResetBoard} title="Reset Local Board">
           Reset Board
