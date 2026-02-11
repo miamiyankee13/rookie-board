@@ -20,9 +20,20 @@ export function Header({
   return (
     <div className="card header">
       <div className="row space">
-        <div className="row" style={{ gap: 12, alignItems: "center" }}>
-          <div className="h1">{board.yearLabel}</div>
-          <RookieIcon size={34} />
+        <div
+          className="row"
+          style={{
+            gap: 10,
+            alignItems: "center",
+            lineHeight: 1,
+          }}
+        >
+          <div className="h1" style={{ lineHeight: 1 }}>
+            {board.yearLabel}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", transform: "translateY(-2px)" }}>
+            <RookieIcon size={32} />
+          </div>
         </div>
 
         <div className="row" style={{ gap: 8 }}>
