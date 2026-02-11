@@ -680,23 +680,24 @@ a { color: inherit; }
     grid-template-columns: 92px 1fr;
   }
 
-  /* WR: RP + ZAP first row, Category below (not full width) */
+  /* WR: 2-column layout */
   .posFields.posFields--wr {
     display: grid;
-    grid-template-columns: 74px 92px 1fr;
-    grid-template-areas:
-      "rp  zap  ."
-      "cat .    .";
+    grid-template-columns: 74px 92px;
     gap: 8px;
   }
 
-  .posFields.posFields--wr .rpInput { grid-area: rp; }
-  .posFields.posFields--wr .zapInput { grid-area: zap; }
+  .posFields.posFields--wr .rpInput {
+    grid-column: 1;
+  }
 
+  .posFields.posFields--wr .zapInput {
+    grid-column: 2;
+  }
+
+  /* Category spans both WR columns (RP + ZAP width) */
   .posFields.posFields--wr .categoryInput {
-    grid-area: cat;
-    width: 72%;          /* adjust 70–75% if desired */
-    justify-self: start;
+    grid-column: 1 / 3;
   }
 }
 
