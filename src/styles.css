@@ -674,18 +674,19 @@ a { color: inherit; }
 
 /* Mobile position card field sizing */
 @media (max-width: 520px) {
+
   /* Standard (QB/RB/TE): ZAP fixed, Category flexible */
   .posFields.posFields--std {
     grid-template-columns: 92px 1fr;
   }
 
-  /* WR: RP + ZAP first row, Category full width below */
+  /* WR: RP + ZAP first row, Category below (not full width) */
   .posFields.posFields--wr {
     display: grid;
-    grid-template-columns: 74px 92px 1fr; /* allow the grid to expand */
+    grid-template-columns: 74px 92px 1fr;
     grid-template-areas:
       "rp  zap  ."
-      "cat cat  cat";
+      "cat .    .";
     gap: 8px;
   }
 
@@ -694,7 +695,8 @@ a { color: inherit; }
 
   .posFields.posFields--wr .categoryInput {
     grid-area: cat;
-    width: 100%;
+    width: 72%;          /* adjust 70–75% if desired */
+    justify-self: start;
   }
 }
 
