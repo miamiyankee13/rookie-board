@@ -583,9 +583,9 @@ a { color: inherit; }
 .positionTable col.colTier { width: 120px; }
 .positionTable col.colRank { width: 64px; }
 .positionTable col.colPlayer { width: auto;}
-.positionTable col.colRP { width: 80px; }
-.positionTable col.colZAP { width: 96px; }
-.positionTable col.colCategory { width: 180px; }
+.positionTable col.colRP { width: 83px; }
+.positionTable col.colZAP { width: 83px; }
+.positionTable col.colCategory { width: 166px; }
 .positionTable col.colNotes { width: 84px; }
 
 /* Desktop: keep player name from forcing overflow */
