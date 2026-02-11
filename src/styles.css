@@ -301,24 +301,40 @@ a { color: inherit; }
 
 @media (max-width: 520px) {
   .tierHeader {
-    flex-direction: column;
-    align-items: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* allows clean wrap if needed */
   }
 
+  /* Inputs stay compact and on one line */
   .tierInputs {
-    flex-direction: column;
-    align-items: stretch;
+    display: flex;
+    align-items: center;
     gap: 8px;
+    flex-wrap: nowrap;
   }
 
-  /* Let title input fill width on mobile */
-  .tierInputs .input {
-    max-width: none !important;
+  /* Title input (e.g. "Tier 1") */
+  .tierInputs .input:not(.tierNoteInput) {
+    width: 110px;
   }
 
-  /* Buttons row sits below inputs */
+  /* Tier note input */
+  .tierNoteInput {
+    width: 150px;
+  }
+
+  /* Button row stays tight */
   .tierHeader > .row {
-    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* If wrapping happens, keep buttons aligned right */
+  .tierHeader > .row {
+    margin-left: auto;
   }
 }
 
