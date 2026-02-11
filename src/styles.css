@@ -411,20 +411,24 @@ a { color: inherit; }
     line-height: 1;
   }
 
-  /* Keep 2nd line controls tucked under the content (not full-width right aligned) */
   .playerRowMeta {
-    grid-column: 4 / -1;      /* <-- key change: start under rank, not col 1 */
+    grid-column: 1 / -1; /* full width row */
     display: flex;
-    justify-content: flex-start; /* <-- key change: remove right-align whitespace */
     align-items: center;
     gap: 10px;
     margin-top: 6px;
   }
 
-  /* Make the select not feel tiny on iPhone */
+  /* Select lives on the left */
   .playerRowMeta .select {
-    width: auto;
-    min-width: 88px;
+    min-width: 96px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  /* Icons stay right aligned */
+  .playerRowMeta .smallActions {
+    margin-left: auto; /* pushes icons to the right */
   }
 
   /* Bigger tap targets */
