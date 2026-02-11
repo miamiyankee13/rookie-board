@@ -452,7 +452,9 @@ a { color: inherit; }
 
   /* Select lives on the left */
   .playerRowMeta .select {
-    min-width: 96px;
+    width: 84px;        
+    min-width: 84px;    
+    flex: 0 0 auto;     
     height: 34px;
     font-size: 16px;
   }
