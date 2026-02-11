@@ -184,7 +184,7 @@ export default function App() {
   const doCopy = async () => {
     try {
       const ok = await copyText(JSON.stringify(board));
-      setToast(ok ? "Copied Board" : "Copy Failed");
+      setToast(ok ? "Copied JSON Board" : "Copy Failed");
     } catch {
       setToast("Copy Failed");
     }
@@ -200,7 +200,7 @@ export default function App() {
       setBoard({ ...parsed, updatedAt: Date.now() });
       setPasteOpen(false);
       setPasteText("");
-      setToast("Pasted Board");
+      setToast("Pasted JSON Board");
     } catch {
       setToast("Invalid JSON");
     }
@@ -288,10 +288,10 @@ export default function App() {
         )}
       </Drawer>
 
-      <Modal open={pasteOpen} title="Paste Board (JSON)" onClose={() => setPasteOpen(false)}>
+      <Modal open={pasteOpen} title="Paste JSON Board" onClose={() => setPasteOpen(false)}>
         <div style={{ display: "grid", gap: 10 }}>
           <div className="muted">
-            Paste a Previously Copied Board (JSON). This Will Replace Your Current Local Board.
+            Paste a previously copied board (JSON). This will replace your current local board.
           </div>
           <textarea
             className="textarea"

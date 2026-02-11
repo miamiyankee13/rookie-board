@@ -21,21 +21,22 @@ export function Header({
         </div>
 
         <div className="row" style={{ gap: 8 }}>
-          <button className="btn" onClick={onToggleTheme}>
+          <button className="btn" onClick={onToggleTheme} title="Toggle Theme">
             {theme === "dark" ? "Light" : "Dark"}
           </button>
-          <button className="btn" onClick={onNewTier}>+ Tier</button>
+          <button className="btn" onClick={onNewTier} title="Add a Tier">+ Tier</button>
         </div>
       </div>
 
       <div className="hr" />
 
       <div className="row" style={{ flexWrap: "wrap" }}>
-        <button className="btn" onClick={onExport}>Export JSON</button>
+        <button className="btn" onClick={onExport} title="Export JSON File">Export JSON</button>
 
         <button
           className="btn"
           onClick={() => fileRef.current?.click()}
+          title="Import JSON File"
         >
           Import JSON
         </button>
@@ -51,10 +52,10 @@ export function Header({
           }}
         />
 
-        <button className="btn" onClick={onCopy}>Copy Board</button>
-        <button className="btn" onClick={onPasteOpen}>Paste Board</button>
+        <button className="btn" onClick={onCopy} title="Copy JSON Board">Copy JSON</button>
+        <button className="btn" onClick={onPasteOpen} title="Paste JSON Board">Paste JSON</button>
 
-        <button className="btn" onClick={onResetBoard} title="Resets local board only">
+        <button className="btn" onClick={onResetBoard} title="Reset Local Board">
           Reset Board
         </button>
       </div>
