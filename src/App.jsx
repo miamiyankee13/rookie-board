@@ -98,6 +98,7 @@ export default function App() {
 
       return { ...b, tiers: newTiers, updatedAt: Date.now() };
     });
+    setToast("Tier Deleted");
   };
 
   const addTier = () => {
@@ -109,6 +110,7 @@ export default function App() {
       ],
       updatedAt: Date.now(),
     }));
+    setToast("Tier Added");
   };
 
   const addPlayerToTier = (tierId) => {

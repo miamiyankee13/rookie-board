@@ -32,7 +32,7 @@ export function makeSampleBoard() {
   return {
     version: 1,
     boardId: nanoid(),
-    yearLabel: "2026 Rookie Board",
+    yearLabel: "Rookie Board 2026",
     updatedAt: Date.now(),
     tiers: [t1, t2],
     players,
