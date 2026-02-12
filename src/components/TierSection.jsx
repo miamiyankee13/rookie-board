@@ -36,7 +36,7 @@ export function TierSection({
             />
             <input
               className="input tierNoteInput"
-              placeholder="Tier note (optional)"
+              placeholder="Tier Note"
               value={tier.note ?? ""}
               onChange={(e) => onUpdateTier(tier.id, { note: e.target.value })}
             />

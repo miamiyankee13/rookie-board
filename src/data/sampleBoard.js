@@ -14,10 +14,10 @@ export function makeSampleBoard() {
     };
   };
 
-  const p1 = mkPlayer("Jeremiah Love", "RB");
-  const p2 = mkPlayer("Fernando Mendoza", "QB");
-  const p3 = mkPlayer("Makai Lemon", "WR");
-  const p4 = mkPlayer("Carnell Tate", "WR");
+  const p1 = mkPlayer("Qaurterback", "QB");
+  const p2 = mkPlayer("Running Back", "RB");
+  const p3 = mkPlayer("Wide Receiver", "WR");
+  const p4 = mkPlayer("Tight End", "TE");
 
   const t1 = { id: nanoid(), title: defaultTierTitle(0), note: "", playerIds: [p1.id, p2.id, p3.id, p4.id] };
   const t2 = { id: nanoid(), title: defaultTierTitle(1), note: "", playerIds: [] };
