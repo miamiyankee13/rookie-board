@@ -29,6 +29,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
   }
 
   const showRP = position === "WR";
+  const showZAP = position !== "QB";
 
   return (
     <div className="card" style={{ padding: 12 }}>
@@ -47,7 +48,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
               <col className="colRank" />
               <col className="colPlayer" />
               {showRP && <col className="colRP" />}
-              <col className="colZAP" />
+              {showZAP && <col className="colZAP" />}
               <col className="colCategory" />
               <col className="colNotes" />
             </colgroup>
@@ -58,7 +59,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 <th className="th">Rank</th>
                 <th className="th">Player</th>
                 {showRP && <th className="th">RP</th>}
-                <th className="th">ZAP</th>
+                {showZAP && <th className="th">ZAP</th>}
                 <th className="th">Category</th>
                 <th className="th">Notes</th>
               </tr>
@@ -95,18 +96,20 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                     </td>
                   )}
 
-                  <td className="td">
-                    <input
-                      className="input"
-                      value={r.player.posMeta?.ZAP ?? ""}
-                      onChange={(e) =>
-                        onUpdatePlayer(r.player.id, {
-                          posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
-                        })
-                      }
-                      placeholder="ZAP"
-                    />
-                  </td>
+                  {showZAP && (
+                    <td className="td">
+                      <input
+                        className="input"
+                        value={r.player.posMeta?.ZAP ?? ""}
+                        onChange={(e) =>
+                          onUpdatePlayer(r.player.id, {
+                            posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
+                          })
+                        }
+                        placeholder="ZAP"
+                      />
+                    </td>
+                  )}
 
                   <td className="td">
                     <input
@@ -161,7 +164,11 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 <span className="posMetaText">#{r.overallRank}</span>
               </div>
 
-              <div className={`posFields ${showRP ? "posFields--wr" : "posFields--std"}`}>
+              <div
+                className={`posFields ${
+                  showRP ? "posFields--wr" : position === "QB" ? "posFields--qb" : "posFields--std"
+                }`}
+              >
                 {showRP && (
                   <input
                     className="input rpInput"
@@ -175,16 +182,18 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                   />
                 )}
 
-                <input
-                  className="input zapInput"
-                  value={r.player.posMeta?.ZAP ?? ""}
-                  onChange={(e) =>
-                    onUpdatePlayer(r.player.id, {
-                      posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
-                    })
-                  }
-                  placeholder="ZAP"
-                />
+                {showZAP && (
+                  <input
+                    className="input zapInput"
+                    value={r.player.posMeta?.ZAP ?? ""}
+                    onChange={(e) =>
+                      onUpdatePlayer(r.player.id, {
+                        posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
+                      })
+                    }
+                    placeholder="ZAP"
+                  />
+                )}
 
                 <input
                   className="input categoryInput"
