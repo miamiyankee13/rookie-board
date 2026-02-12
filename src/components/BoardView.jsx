@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   DndContext,
   closestCenter,
@@ -40,6 +40,26 @@ export function BoardView({
   const playersById = board.players;
 
   const allPlayerIdsInOrder = tiers.flatMap((t) => t.playerIds);
+
+  const posRankById = useMemo(() => {
+    const counters = { QB: 0, RB: 0, WR: 0, TE: 0 };
+    const map = {};
+
+    for (const pid of allPlayerIdsInOrder) {
+      const p = playersById?.[pid];
+      if (!p?.pos) continue;
+
+      // only count the positions we support
+      if (!counters.hasOwnProperty(p.pos)) continue;
+
+      counters[p.pos] += 1;
+      map[pid] = counters[p.pos];
+    }
+
+    return map;
+  }, [allPlayerIdsInOrder, playersById]);
+
+  const getPosRank = (playerId) => posRankById[playerId] ?? null;
 
   const getOverallRank = (playerId) => {
     const idx = allPlayerIdsInOrder.indexOf(playerId);
@@ -130,6 +150,7 @@ export function BoardView({
             tier={tier}
             playersById={playersById}
             getOverallRank={getOverallRank}
+            getPosRank={getPosRank}
             onUpdateTier={onUpdateTier}
             onDeleteTier={onDeleteTier}
             onAddPlayerToTier={onAddPlayerToTier}

@@ -10,6 +10,7 @@ export function PlayerRow({
   id,
   player,
   overallRank,
+  posRank,
   onUpdatePlayer,
   onDeletePlayer,
   onOpenNotes,
@@ -30,7 +31,10 @@ export function PlayerRow({
 
       <div className="rank">#{overallRank}</div>
 
-      <span className={`pill ${posClass(player.pos)}`}>{player.pos}</span>
+      <span className={`pill ${posClass(player.pos)}`}>
+        {player.pos}
+        {posRank ? posRank : ""}
+      </span>
 
       <input
         className="input nameInput"

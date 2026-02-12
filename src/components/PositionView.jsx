@@ -11,6 +11,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
   // Preserve overall order & tier context, but only show the chosen position
   const rows = [];
   let overallRank = 0;
+  let posRank = 0;
 
   for (const tier of tiers) {
     for (const pid of tier.playerIds) {
@@ -23,6 +24,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
         tierTitle: tier.title,
         tierId: tier.id,
         overallRank,
+        posRank: (posRank += 1),
         player: p,
       });
     }
@@ -78,7 +80,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
 
                   <td className="td playerCol">
                     <div className="row" style={{ gap: 10 }}>
-                      <span className={`pill ${posClass(position)}`}>{position}</span>
+                      <span className={`pill ${posClass(position)}`}>{position}{r.posRank}</span>
                       <span style={{ fontWeight: 700 }}>{r.player.name}</span>
                     </div>
                   </td>
@@ -153,7 +155,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
             <div className="posCard" key={r.player.id}>
               <div className="posTop">
                 <div className="row" style={{ gap: 8, minWidth: 0 }}>
-                  <span className={`pill ${posClass(position)}`}>{position}</span>
+                  <span className={`pill ${posClass(position)}`}>{position}{r.posRank}</span>
                   <div className="posName">{r.player.name || "Unnamed"}</div>
                 </div>
 

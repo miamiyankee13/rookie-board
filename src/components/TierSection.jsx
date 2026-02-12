@@ -7,6 +7,7 @@ export function TierSection({
   tier,
   playersById,
   getOverallRank,
+  getPosRank,
   onUpdateTier,
   onDeleteTier,
   onAddPlayerToTier,
@@ -68,6 +69,7 @@ export function TierSection({
                 id={pid}
                 player={p}
                 overallRank={getOverallRank(pid)}
+                posRank={getPosRank ? getPosRank(pid) : null}
                 onUpdatePlayer={onUpdatePlayer}
                 onDeletePlayer={onDeletePlayer}
                 onOpenNotes={onOpenNotes}
