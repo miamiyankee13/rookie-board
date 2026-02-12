@@ -30,6 +30,8 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
 
   const showRP = position === "WR";
   const showZAP = position !== "QB";
+  const showCategory = position !== "QB";
+  const showFields = showRP || showZAP || showCategory;
 
   return (
     <div className="card" style={{ padding: 12 }}>
@@ -49,7 +51,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
               <col className="colPlayer" />
               {showRP && <col className="colRP" />}
               {showZAP && <col className="colZAP" />}
-              <col className="colCategory" />
+              {showCategory && <col className="colCategory" />}
               <col className="colNotes" />
             </colgroup>
 
@@ -60,7 +62,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 <th className="th">Player</th>
                 {showRP && <th className="th">RP</th>}
                 {showZAP && <th className="th">ZAP</th>}
-                <th className="th">Category</th>
+                {showCategory && <th className="th">Category</th>}
                 <th className="th">Notes</th>
               </tr>
             </thead>
@@ -111,18 +113,20 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                     </td>
                   )}
 
-                  <td className="td">
-                    <input
-                      className="input"
-                      value={r.player.posMeta?.Category ?? ""}
-                      onChange={(e) =>
-                        onUpdatePlayer(r.player.id, {
-                          posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
-                        })
-                      }
-                      placeholder="Category"
-                    />
-                  </td>
+                  {showCategory && (
+                    <td className="td">
+                      <input
+                        className="input"
+                        value={r.player.posMeta?.Category ?? ""}
+                        onChange={(e) =>
+                          onUpdatePlayer(r.player.id, {
+                            posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
+                          })
+                        }
+                        placeholder="Category"
+                      />
+                    </td>
+                  )}
 
                   <td className="td">
                     <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
@@ -137,7 +141,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
 
         {rows.length === 0 && (
           <div className="muted" style={{ padding: 10 }}>
-            No {position} players yet.
+            No {position} Added to Big Board
           </div>
         )}
       </div>
@@ -164,55 +168,59 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                 <span className="posMetaText">#{r.overallRank}</span>
               </div>
 
-              <div
-                className={`posFields ${
-                  showRP ? "posFields--wr" : position === "QB" ? "posFields--qb" : "posFields--std"
-                }`}
-              >
-                {showRP && (
-                  <input
-                    className="input rpInput"
-                    value={r.player.posMeta?.RP ?? ""}
-                    onChange={(e) =>
-                      onUpdatePlayer(r.player.id, {
-                        posMeta: { ...(r.player.posMeta ?? {}), RP: e.target.value },
-                      })
-                    }
-                    placeholder="RP"
-                  />
-                )}
+              {showFields && (
+                <div
+                  className={`posFields ${
+                    showRP ? "posFields--wr" : position === "QB" ? "posFields--qb" : "posFields--std"
+                  }`}
+                >
+                  {showRP && (
+                    <input
+                      className="input rpInput"
+                      value={r.player.posMeta?.RP ?? ""}
+                      onChange={(e) =>
+                        onUpdatePlayer(r.player.id, {
+                          posMeta: { ...(r.player.posMeta ?? {}), RP: e.target.value },
+                        })
+                      }
+                      placeholder="RP"
+                    />
+                  )}
 
-                {showZAP && (
-                  <input
-                    className="input zapInput"
-                    value={r.player.posMeta?.ZAP ?? ""}
-                    onChange={(e) =>
-                      onUpdatePlayer(r.player.id, {
-                        posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
-                      })
-                    }
-                    placeholder="ZAP"
-                  />
-                )}
+                  {showZAP && (
+                    <input
+                      className="input zapInput"
+                      value={r.player.posMeta?.ZAP ?? ""}
+                      onChange={(e) =>
+                        onUpdatePlayer(r.player.id, {
+                          posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
+                        })
+                      }
+                      placeholder="ZAP"
+                    />
+                  )}
 
-                <input
-                  className="input categoryInput"
-                  value={r.player.posMeta?.Category ?? ""}
-                  onChange={(e) =>
-                    onUpdatePlayer(r.player.id, {
-                      posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
-                    })
-                  }
-                  placeholder="Category"
-                />
-              </div>
+                  {showCategory && (
+                    <input
+                      className="input categoryInput"
+                      value={r.player.posMeta?.Category ?? ""}
+                      onChange={(e) =>
+                        onUpdatePlayer(r.player.id, {
+                          posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
+                        })
+                      }
+                      placeholder="Category"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
 
         {rows.length === 0 && (
           <div className="muted" style={{ padding: 10 }}>
-            No {position} players yet.
+            No {position} Added to Big Board
           </div>
         )}
       </div>

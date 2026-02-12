@@ -701,10 +701,6 @@ a { color: inherit; }
   .posFields.posFields--wr .categoryInput {
     grid-column: 1 / 3;
   }
-
-  .posFields.posFields--qb {
-    grid-template-columns: 166px;
-  }
 }
 
 /* iOS: prevent zoom on focus (mobile cards only) */
