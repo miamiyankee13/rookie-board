@@ -410,7 +410,7 @@ a { color: inherit; }
 
 @media (max-width: 520px) {
   .playerRow {
-    grid-template-columns: 36px 34px max-content 1fr; /* bigger handle + rank */
+    grid-template-columns: 40px 34px max-content 1fr; /* bigger handle + rank */
     grid-template-rows: auto auto;
     gap: 6px;
     padding: 10px 10px;
@@ -425,8 +425,8 @@ a { color: inherit; }
 
   /* Bigger, easier drag handle target */
   .dragHandle {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
   }
 
@@ -443,27 +443,29 @@ a { color: inherit; }
   }
 
   .playerRowMeta {
-    grid-column: 1 / -1; /* full width row */
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     margin-top: 6px;
   }
 
   /* Select lives on the left */
   .playerRowMeta .select {
-    width: 72px;        
-    min-width: 72px;    
-    flex: 0 0 auto;     
-    height: 34px;
-    font-size: 16px;
+    width: 68px;        
+    min-width: 68px;
+    flex: 0 0 auto;
+    height: 32px;         
+    padding: 6px 8px;     
+    font-size: 16px;      
     text-align: center;
     text-align-last: center;
-  }
+    }
 
-  /* Icons stay right aligned */
+  /* Keep icons grouped with the select (no auto push) */
   .playerRowMeta .smallActions {
-    margin-left: auto; /* pushes icons to the right */
+    margin-left: 0;
   }
 
   /* Bigger tap targets */
