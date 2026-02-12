@@ -5,6 +5,8 @@ import { PlayerRow } from "./PlayerRow";
 
 export function TierSection({
   tier,
+  tierIndex,
+  onAddTier,
   playersById,
   getOverallRank,
   getPosRank,
@@ -48,13 +50,20 @@ export function TierSection({
           <button className="btn" onClick={() => onAddPlayerToTier(tier.id)}>
             + Player
           </button>
-          <button
-            className="btn"
-            onClick={() => onDeleteTier(tier.id)}
-            title="Delete tier"
-          >
-            Delete
-          </button>
+
+          {tierIndex === 0 ? (
+            <button className="btn" onClick={onAddTier} title="Add a Tier">
+              + Tier
+            </button>
+          ) : (
+            <button
+              className="btn"
+              onClick={() => onDeleteTier(tier.id)}
+              title="Delete tier"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
 

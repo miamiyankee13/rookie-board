@@ -11,11 +11,8 @@ export function Header({
   onCopy,
   onPasteOpen,
   onResetBoard,
-  activeTab,
 }) {
   const fileRef = useRef(null);
-
-  const isBigBoard = activeTab === "Big Board";
 
   return (
     <div className="card header">
@@ -41,11 +38,6 @@ export function Header({
             {theme === "dark" ? "Light" : "Dark"}
           </button>
 
-          {isBigBoard && (
-            <button className="btn" onClick={onNewTier} title="Add a Tier">
-              + Tier
-            </button>
-          )}
         </div>
       </div>
 

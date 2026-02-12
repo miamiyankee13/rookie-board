@@ -21,6 +21,7 @@ import { TierSection } from "./TierSection";
  */
 export function BoardView({
   board,
+  onAddTier,
   onUpdateBoard,
   onUpdateTier,
   onDeleteTier,
@@ -144,10 +145,12 @@ export function BoardView({
       onDragEnd={handleDragEnd}
     >
       <div className="grid">
-        {tiers.map((tier) => (
+        {tiers.map((tier, idx) => (
           <TierSection
             key={tier.id}
             tier={tier}
+            tierIndex={idx}
+            onAddTier={onAddTier}
             playersById={playersById}
             getOverallRank={getOverallRank}
             getPosRank={getPosRank}

@@ -231,7 +231,6 @@ export default function App() {
         board={board}
         theme={theme}
         onToggleTheme={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
-        onNewTier={addTier}
         onExport={doExport}
         onImportFile={doImportFile}
         onCopy={doCopy}
@@ -253,6 +252,7 @@ export default function App() {
       {tab === TAB_BIG && (
         <BoardView
           board={board}
+          onAddTier={addTier}
           onUpdateBoard={updateBoard}
           onUpdateTier={updateTier}
           onDeleteTier={deleteTier}
