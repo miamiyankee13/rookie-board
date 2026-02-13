@@ -12,7 +12,7 @@
 
   /* Position pill colors – DARK MODE */
   --pill-qb-bg: #2a1f26;
-  --pill-qb-fg: #b91c1c;
+  --pill-qb-fg: color-mix(in oklab, #b91c1c 78%, var(--text));
 
   --pill-rb-bg: #143022;
   --pill-rb-fg: #16a34a;
