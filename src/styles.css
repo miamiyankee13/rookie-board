@@ -145,7 +145,8 @@ a { color: inherit; }
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
-  min-width: 44px;
+  min-width: 56px;
+  font-variant-numeric: tabular-nums;
   background: var(--pill-bg);
   color: var(--pill-fg);
   border: 1px solid color-mix(in oklab, var(--pill-fg) 55%, transparent);
