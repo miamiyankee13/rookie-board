@@ -148,7 +148,7 @@ a { color: inherit; }
   min-width: 44px;
   background: var(--pill-bg);
   color: var(--pill-fg);
-  border: 1px solid color-mix(in oklab, var(--pill-fg) 45%, transparent);
+  border: 1px solid color-mix(in oklab, var(--pill-fg) 55%, transparent);
   user-select: none;
   text-align: center;
 }
@@ -247,7 +247,10 @@ a { color: inherit; }
   background: transparent;
   color: var(--text);
   border-radius: 999px;
-  padding: 6px 10px;
+  padding: 0px 12px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
   font-size: 13px;
   cursor: pointer;
   font-weight: 600;
@@ -264,31 +267,31 @@ a { color: inherit; }
 }
 
 .tab-big-board[data-active="true"] {
-  border-color: color-mix(in oklab, var(--pill-roster-fg) 55%, transparent);
+  border-color: var(--pill-roster-fg);
   background: var(--pill-roster-bg);
   color: var(--pill-roster-fg);
 }
 
 .tab-qb[data-active="true"] {
-  border-color: color-mix(in oklab, var(--pill-qb-fg) 55%, transparent);
+  border-color: var(--pill-qb-fg);
   background: var(--pill-qb-bg);
   color: var(--pill-qb-fg);
 }
 
 .tab-rb[data-active="true"] {
-  border-color: color-mix(in oklab, var(--pill-rb-fg) 55%, transparent);
+  border-color: var(--pill-rb-fg);
   background: var(--pill-rb-bg);
   color: var(--pill-rb-fg);
 }
 
 .tab-wr[data-active="true"] {
-  border-color: color-mix(in oklab, var(--pill-wr-fg) 55%, transparent);
+  border-color: var(--pill-wr-fg);
   background: var(--pill-wr-bg);
   color: var(--pill-wr-fg);
 }
 
 .tab-te[data-active="true"] {
-  border-color: color-mix(in oklab, var(--pill-te-fg) 55%, transparent);
+  border-color: var(--pill-te-fg);
   background: var(--pill-te-bg);
   color: var(--pill-te-fg);
 }
