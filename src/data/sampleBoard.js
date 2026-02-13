@@ -14,7 +14,7 @@ export function makeSampleBoard() {
     };
   };
 
-  const p1 = mkPlayer("Qaurterback", "QB");
+  const p1 = mkPlayer("Quarterback", "QB");
   const p2 = mkPlayer("Running Back", "RB");
   const p3 = mkPlayer("Wide Receiver", "WR");
   const p4 = mkPlayer("Tight End", "TE");
