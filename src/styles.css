@@ -708,6 +708,12 @@ a { color: inherit; }
   .posMobile { display: block; }
 }
 
+/* Phone landscape: use mobile PositionView cards to avoid cramped table columns (esp. WR RP) */
+@media (max-height: 520px) and (orientation: landscape) and (max-width: 900px) {
+  .posDesktop { display: none; }
+  .posMobile { display: block; }
+}
+
 /* Mobile position cards */
 .posCard {
   background: var(--panel2);
