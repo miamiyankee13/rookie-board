@@ -68,8 +68,8 @@
   --rb-logo-stroke: rgba(0,0,0,0.6);
 
     /* Big Board row hover (light) */
-  --rb-row-hover-bg: rgba(243, 244, 246, 0.55);
-  --rb-row-hover-border: rgba(17, 24, 39, 0.14);
+  --rb-row-hover-bg: rgba(229, 231, 235, 0.45);
+  --rb-row-hover-border: rgba(17, 24, 39, 0.18);
 }
 
 * { box-sizing: border-box; }
