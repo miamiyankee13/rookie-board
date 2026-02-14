@@ -241,15 +241,13 @@ export default function App() {
         activeTab={tab}
       />
 
-      <div style={{ height: 12 }} />
-
-      <div className="card" style={{ padding: 12 }}>
+    <div className="tabsSticky">
+      <div className="card tabsCard">
         <div className="row space">
           <Tabs tabs={tabs} active={tab} onChange={setTab} />
         </div>
       </div>
-
-      <div style={{ height: 12 }} />
+    </div>
 
       {tab === TAB_BIG && (
         <BoardView
