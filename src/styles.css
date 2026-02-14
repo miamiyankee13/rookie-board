@@ -30,6 +30,10 @@
   --rb-logo-accent: #38bdf8;
   --rb-logo-band: rgba(229,231,235,0.75);
   --rb-logo-stroke: rgba(255,255,255,0.14);
+
+    /* Big Board row hover (dark default) */
+  --rb-row-hover-bg: rgba(255, 255, 255, 0.04);
+  --rb-row-hover-border: rgba(255, 255, 255, 0.18);
 }
 
 [data-theme="light"] {
@@ -62,6 +66,10 @@
   --rb-logo-accent: #0284c7;
   --rb-logo-band: rgba(17,24,39,0.6);
   --rb-logo-stroke: rgba(0,0,0,0.6);
+
+    /* Big Board row hover (light) */
+  --rb-row-hover-bg: rgba(243, 244, 246, 0.55);
+  --rb-row-hover-border: rgba(17, 24, 39, 0.14);
 }
 
 * { box-sizing: border-box; }
@@ -400,6 +408,38 @@ a { color: inherit; }
   margin-top: 8px;
   touch-action: manipulation;
   user-select: none;
+}
+
+/* Big Board player row hover (scoped to tiers so PositionView/table isn't affected) */
+.tierBody .playerRow {
+  transition:
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+/* Always allow hover lift (desktop/laptop will work regardless of media query quirks) */
+.tierBody .playerRow:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  border-color: var(--rb-row-hover-border);
+  background-color: var(--rb-row-hover-bg);
+}
+
+/* If we're dragging, suppress hover styling (prevents flicker while moving) */
+.tierBody .playerRow[data-dragging="true"],
+.tierBody .playerRow[data-dragging="true"]:hover {
+  box-shadow: none;
+  background-color: var(--panel2);
+  border-color: var(--border);
+}
+
+/* Mobile: disable hover (prevents sticky “hover” on iPhone) */
+@media (max-width: 520px) {
+  .tierBody .playerRow:hover {
+    box-shadow: none;
+    background-color: var(--panel2);
+    border-color: var(--border);
+  }
 }
 
 .dragHandle {

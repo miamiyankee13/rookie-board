@@ -24,7 +24,12 @@ export function PlayerRow({
   };
 
   return (
-    <div ref={setNodeRef} className="playerRow" style={style}>
+    <div
+      ref={setNodeRef}
+      className="playerRow"
+      style={style}
+      data-dragging={isDragging ? "true" : "false"}
+    >
       <div className="dragHandle" {...attributes} {...listeners} title="Drag to reorder">
         ☰
       </div>
