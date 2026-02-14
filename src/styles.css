@@ -755,15 +755,15 @@ a { color: inherit; }
   margin-top: 10px;
 }
 
-/* Mobile position card field sizing */
-@media (max-width: 520px) {
+/* Apply mobile field sizing in portrait AND phone landscape */
+@media (max-width: 520px),
+       (max-height: 520px) and (orientation: landscape) and (max-width: 900px) {
 
   .posFields.posFields--std {
     grid-template-columns: 83px 166px;
     justify-content: start;
   }
 
-  /* WR: 2-column layout */
   .posFields.posFields--wr {
     display: grid;
     grid-template-columns: 83px 83px;
@@ -778,7 +778,6 @@ a { color: inherit; }
     grid-column: 2;
   }
 
-  /* Category spans both WR columns (RP + ZAP width) */
   .posFields.posFields--wr .categoryInput {
     grid-column: 1 / 3;
   }
