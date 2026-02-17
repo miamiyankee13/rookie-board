@@ -142,6 +142,16 @@ a { color: inherit; }
   outline: none;
 }
 
+/* iOS Safari: prevent focus-zoom on phones (portrait + landscape) */
+@media (max-width: 520px),
+       (max-height: 520px) and (orientation: landscape) and (max-width: 900px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 .textarea { min-height: 84px; resize: vertical; }
 
 .pill {
@@ -603,14 +613,6 @@ a { color: inherit; }
     font-size: 12px;
   }
 
-  /* iOS Safari: prevent auto-zoom on input focus */
-  .positionTable .input,
-  .positionTable .select,
-  .positionTable button {
-    font-size: 16px;
-  }
-
-
   /* Keep tier text from forcing width */
   .positionTable .colTier {
     max-width: 120px;
@@ -783,15 +785,6 @@ a { color: inherit; }
   }
 }
 
-/* iOS: prevent zoom on focus (mobile cards only) */
-@media (max-width: 520px) {
-  .posFields .input,
-  .posFields .select,
-  .posTop .btn {
-    font-size: 16px;
-  }
-}
-
 .drawerOverlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.45);
@@ -806,15 +799,6 @@ a { color: inherit; }
   border: 1px solid var(--border);
   background: var(--panel);
   padding: 14px;
-}
-
-/* iOS Safari: prevent focus zoom inside Drawer/Modal */
-@media (max-width: 520px) {
-  .drawer .input,
-  .drawer .select,
-  .drawer .textarea {
-    font-size: 16px;
-  }
 }
 
 .toastWrap {
