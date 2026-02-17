@@ -145,9 +145,9 @@ a { color: inherit; }
 /* iOS Safari: prevent focus-zoom on phones (portrait + landscape) */
 @media (max-width: 520px),
        (max-height: 520px) and (orientation: landscape) and (max-width: 900px) {
-  input,
-  select,
-  textarea {
+  .input,
+  .select,
+  .textarea {
     font-size: 16px;
   }
 }
