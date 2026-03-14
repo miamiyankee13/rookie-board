@@ -762,13 +762,13 @@ a { color: inherit; }
        (max-height: 520px) and (orientation: landscape) and (max-width: 900px) {
 
   .posFields.posFields--std {
-    grid-template-columns: 85px 178px;
+    grid-template-columns: 85px 182px;
     justify-content: start;
   }
 
   .posFields.posFields--wr {
     display: grid;
-    grid-template-columns: 85px 85px;
+    grid-template-columns: 87px 87px;
     gap: 8px;
   }
 
