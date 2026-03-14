@@ -664,7 +664,7 @@ a { color: inherit; }
 .positionTable col.colPlayer { width: auto;}
 .positionTable col.colRP { width: 75px; }
 .positionTable col.colZAP { width: 75px; }
-.positionTable col.colCategory { width: 170px; }
+.positionTable col.colCategory { width: 176px; }
 .positionTable col.colNotes { width: 84px; }
 
 /* Desktop: keep player name from forcing overflow */
