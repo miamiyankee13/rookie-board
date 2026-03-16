@@ -408,7 +408,7 @@ a { color: inherit; }
 
 .playerRow {
   display: grid;
-  grid-template-columns: 24px 28px max-content 1fr 92px 72px;
+  grid-template-columns: 24px 36px max-content 1fr 92px 72px;
   gap: 8px;
   align-items: center;
   padding: 8px 10px;
@@ -467,7 +467,7 @@ a { color: inherit; }
   color: var(--muted);
   font-size: 14px;
   font-weight: 600;
-  width: 28px;
+  width: 36px;
   text-align: right;
   flex-shrink: 0;
 }
