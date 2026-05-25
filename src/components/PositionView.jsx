@@ -1,14 +1,20 @@
 import React from "react";
+import { ZapField } from "./ZapField";
+import { RpField } from "./RpField";
 
-function posClass(pos) {
-  return pos?.toLowerCase?.() ?? "qb";
+function PosPill({ pos, posRank }) {
+  return (
+    <span className="pv-pill" data-pos={pos}>
+      {pos}
+      {posRank ? <i>{posRank}</i> : null}
+    </span>
+  );
 }
 
 export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
   const tiers = board.tiers;
   const players = board.players;
 
-  // Preserve overall order & tier context, but only show the chosen position
   const rows = [];
   let overallRank = 0;
   let posRank = 0;
@@ -19,7 +25,6 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
       const p = players[pid];
       if (!p) continue;
       if (p.pos !== position) continue;
-
       rows.push({
         tierTitle: tier.title,
         tierId: tier.id,
@@ -30,200 +35,188 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
     }
   }
 
-  const showRP = position === "WR";
+  const showRP  = position === "WR";
   const showZAP = position !== "QB";
-  const showCategory = position !== "QB";
-  const showFields = showRP || showZAP || showCategory;
+  const showCat = position !== "QB";
+
+  const updateMeta = (player, key, value) =>
+    onUpdatePlayer(player.id, {
+      posMeta: { ...(player.posMeta ?? {}), [key]: value },
+    });
+
+  const legend = showRP ? (
+    <span>
+      RP RANK ·
+      <span style={{ marginLeft: 6 }}>
+        <span className="pos-legend-dot elite" /> ELITE ≤5
+      </span>
+      <span style={{ marginLeft: 12 }}>
+        <span className="pos-legend-dot solid" /> SOLID ≤15
+      </span>
+      <span style={{ marginLeft: 12 }}>
+        <span className="pos-legend-dot depth" /> DEPTH 16+
+      </span>
+    </span>
+  ) : null;
 
   return (
-    <div className="card" style={{ padding: 12 }}>
-      <div className="row space">
-        <div>
-          <div className="muted">Edit Tier & Rank on Big Board</div>
+    <div>
+      <div className="pos-note" data-pos={position}>
+        <div>// EDIT TIER &amp; RANK ON BIG BOARD</div>
+        <div className="pos-note-r">
+          <span>
+            <b>{rows.length}</b> {position} ON BOARD
+          </span>
+          {legend}
         </div>
       </div>
 
-      {/* Desktop/tablet table */}
-      <div className="posDesktop">
-        <div className="tableWrap">
-          <table className="table positionTable">
-            <colgroup>
-              <col className="colTier" />
-              <col className="colRank" />
-              <col className="colPlayer" />
-              {showRP && <col className="colRP" />}
-              {showZAP && <col className="colZAP" />}
-              {showCategory && <col className="colCategory" />}
-              <col className="colNotes" />
-            </colgroup>
+      {/* ─── DESKTOP TABLE ─── */}
+      <div className="pv-desktop">
+        <table className="pv-table">
+          <colgroup>
+            <col className="col-tier" />
+            <col className="col-rank" />
+            <col className="col-player" />
+            {showRP && <col className="col-rp" />}
+            {showZAP && <col className="col-zap" />}
+            {showCat && <col className="col-cat" />}
+            <col className="col-notes" />
+          </colgroup>
 
-            <thead>
-              <tr>
-                <th className="th">Tier</th>
-                <th className="th">Rank</th>
-                <th className="th">Player</th>
-                {showRP && <th className="th">RP</th>}
-                {showZAP && <th className="th">ZAP</th>}
-                {showCategory && <th className="th">Category</th>}
-                <th className="th">Notes</th>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th className="num">Rank</th>
+              <th>Player</th>
+              {showRP && <th>RP</th>}
+              {showZAP && <th>ZAP</th>}
+              {showCat && <th>Category</th>}
+              <th>Notes</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.player.id}>
+                <td>
+                  <span className="pv-tier">{r.tierTitle}</span>
+                </td>
+                <td className="num">
+                  <span className="rank">
+                    #{String(r.overallRank).padStart(2, "0")}
+                  </span>
+                </td>
+                <td>
+                  <div className="pv-pname">
+                    <PosPill pos={position} posRank={r.posRank} />
+                    <span className="pv-name">{r.player.name || "Unnamed"}</span>
+                  </div>
+                </td>
+                {showRP && (
+                  <td>
+                    <RpField
+                      value={r.player.posMeta?.RP ?? ""}
+                      onChange={(v) => updateMeta(r.player, "RP", v)}
+                    />
+                  </td>
+                )}
+                {showZAP && (
+                  <td>
+                    <ZapField
+                      value={r.player.posMeta?.ZAP ?? ""}
+                      onChange={(v) => updateMeta(r.player, "ZAP", v)}
+                    />
+                  </td>
+                )}
+                {showCat && (
+                  <td>
+                    <input
+                      className="input sans"
+                      value={r.player.posMeta?.Category ?? ""}
+                      onChange={(e) => updateMeta(r.player, "Category", e.target.value)}
+                      placeholder="Category"
+                    />
+                  </td>
+                )}
+                <td>
+                  <button
+                    className="btn"
+                    onClick={() => onOpenNotes(r.player.id)}
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
-            </thead>
-
-            <tbody>
-              {rows.map((r) => (
-                <tr className="tr" key={r.player.id}>
-                  <td className="td">{r.tierTitle}</td>
-
-                  <td className="td" style={{ fontVariantNumeric: "tabular-nums" }}>
-                    #{r.overallRank}
-                  </td>
-
-                  <td className="td playerCol">
-                    <div className="row" style={{ gap: 10 }}>
-                      <span className={`pill ${posClass(position)}`}>{position}{r.posRank}</span>
-                      <span style={{ fontWeight: 700 }}>{r.player.name}</span>
-                    </div>
-                  </td>
-
-                  {showRP && (
-                    <td className="td">
-                      <input
-                        className="input"
-                        value={r.player.posMeta?.RP ?? ""}
-                        onChange={(e) =>
-                          onUpdatePlayer(r.player.id, {
-                            posMeta: { ...(r.player.posMeta ?? {}), RP: e.target.value },
-                          })
-                        }
-                        placeholder="RP"
-                      />
-                    </td>
-                  )}
-
-                  {showZAP && (
-                    <td className="td">
-                      <input
-                        className="input"
-                        value={r.player.posMeta?.ZAP ?? ""}
-                        onChange={(e) =>
-                          onUpdatePlayer(r.player.id, {
-                            posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
-                          })
-                        }
-                        placeholder="ZAP"
-                      />
-                    </td>
-                  )}
-
-                  {showCategory && (
-                    <td className="td">
-                      <input
-                        className="input"
-                        value={r.player.posMeta?.Category ?? ""}
-                        onChange={(e) =>
-                          onUpdatePlayer(r.player.id, {
-                            posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
-                          })
-                        }
-                        placeholder="Category"
-                      />
-                    </td>
-                  )}
-
-                  <td className="td">
-                    <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
 
         {rows.length === 0 && (
-          <div className="muted" style={{ padding: 10 }}>
-            No {position} Added to Big Board
-          </div>
+          <div className="pv-empty">// NO {position} ADDED TO BIG BOARD</div>
         )}
       </div>
 
-      {/* Mobile cards */}
-      <div className="posMobile">
-        <div style={{ display: "grid", gap: 10, marginTop: 8 }}>
-          {rows.map((r) => (
-            <div className="posCard" key={r.player.id}>
-              <div className="posTop">
-                <div className="row" style={{ gap: 8, minWidth: 0 }}>
-                  <span className={`pill ${posClass(position)}`}>{position}{r.posRank}</span>
-                  <div className="posName">{r.player.name || "Unnamed"}</div>
-                </div>
-
-                <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
-                  Notes
-                </button>
+      {/* ─── MOBILE CARDS ─── */}
+      <div className="pv-mobile">
+        {rows.map((r) => (
+          <div key={r.player.id} className="pv-card" data-pos={position}>
+            <div className="pv-card-top">
+              <div className="pv-pname">
+                <PosPill pos={position} posRank={r.posRank} />
+                <span className="pv-name">{r.player.name || "Unnamed"}</span>
               </div>
+              <button className="btn" onClick={() => onOpenNotes(r.player.id)}>
+                Notes
+              </button>
+            </div>
 
-              <div className="posMetaLine">
-                <span className="posMetaText">{r.tierTitle}</span>
-                <span className="posMetaDot">•</span>
-                <span className="posMetaText">#{r.overallRank}</span>
-              </div>
+            <div className="pv-card-meta">
+              <span>{r.tierTitle}</span>
+              <span>·</span>
+              <b>#{String(r.overallRank).padStart(2, "0")}</b>
+            </div>
 
-              {showFields && (
-                <div
-                  className={`posFields ${
-                    showRP ? "posFields--wr" : position === "QB" ? "posFields--qb" : "posFields--std"
-                  }`}
-                >
-                  {showRP && (
-                    <input
-                      className="input rpInput"
+            {(showRP || showZAP || showCat) && (
+              <div className="pv-card-fields">
+                {showRP && (
+                  <div className="pv-card-field">
+                    <span className="pv-card-field-lbl">RP Rank</span>
+                    <RpField
                       value={r.player.posMeta?.RP ?? ""}
-                      onChange={(e) =>
-                        onUpdatePlayer(r.player.id, {
-                          posMeta: { ...(r.player.posMeta ?? {}), RP: e.target.value },
-                        })
-                      }
-                      placeholder="RP"
+                      onChange={(v) => updateMeta(r.player, "RP", v)}
                     />
-                  )}
-
-                  {showZAP && (
-                    <input
-                      className="input zapInput"
+                  </div>
+                )}
+                {showZAP && (
+                  <div className="pv-card-field">
+                    <span className="pv-card-field-lbl">ZAP</span>
+                    <ZapField
                       value={r.player.posMeta?.ZAP ?? ""}
-                      onChange={(e) =>
-                        onUpdatePlayer(r.player.id, {
-                          posMeta: { ...(r.player.posMeta ?? {}), ZAP: e.target.value },
-                        })
-                      }
-                      placeholder="ZAP"
+                      onChange={(v) => updateMeta(r.player, "ZAP", v)}
                     />
-                  )}
-
-                  {showCategory && (
+                  </div>
+                )}
+                {showCat && (
+                  <div className="pv-card-field">
+                    <span className="pv-card-field-lbl">Category</span>
                     <input
-                      className="input categoryInput"
+                      className="input sans"
                       value={r.player.posMeta?.Category ?? ""}
                       onChange={(e) =>
-                        onUpdatePlayer(r.player.id, {
-                          posMeta: { ...(r.player.posMeta ?? {}), Category: e.target.value },
-                        })
+                        updateMeta(r.player, "Category", e.target.value)
                       }
                       placeholder="Category"
                     />
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
 
         {rows.length === 0 && (
-          <div className="muted" style={{ padding: 10 }}>
-            No {position} Added to Big Board
-          </div>
+          <div className="pv-empty">// NO {position} ADDED TO BIG BOARD</div>
         )}
       </div>
     </div>

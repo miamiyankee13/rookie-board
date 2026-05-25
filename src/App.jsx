@@ -23,7 +23,6 @@ const ACTIVE_TAB_KEY = "rookie_active_tab";
 function formatBoardText(board) {
   const tiers = board?.tiers ?? [];
   const playersById = board?.players ?? {};
-
   const allPlayerIdsInOrder = tiers.flatMap((t) => t.playerIds ?? []);
   const posCounters = { QB: 0, RB: 0, WR: 0, TE: 0 };
   const posRankById = {};
@@ -32,37 +31,28 @@ function formatBoardText(board) {
     const p = playersById?.[pid];
     if (!p?.pos) continue;
     if (!Object.prototype.hasOwnProperty.call(posCounters, p.pos)) continue;
-
     posCounters[p.pos] += 1;
     posRankById[pid] = posCounters[p.pos];
   }
 
   const lines = [];
-
   lines.push(board?.yearLabel || "Rookie Board");
 
   let overallRank = 0;
-
   for (const tier of tiers) {
     const playerIds = tier.playerIds ?? [];
     const tierRows = [];
-
     for (const pid of playerIds) {
       overallRank += 1;
-
       const p = playersById?.[pid];
       if (!p) continue;
-
       const name = String(p.name || "Unnamed").trim() || "Unnamed";
       const pos = p.pos || "";
       const posRank = posRankById[pid];
       const posLabel = pos && posRank ? `${pos}${posRank}` : pos || "—";
-
       tierRows.push(`#${overallRank} ${name} (${posLabel})`);
     }
-
     if (!tierRows.length) continue;
-
     lines.push("");
     lines.push(tier.title || "Untitled Tier");
     lines.push(...tierRows);
@@ -84,14 +74,11 @@ export default function App() {
   });
 
   const [toast, setToast] = useState("");
-
   const [board, setBoard] = useState(() => loadBoard() || makeSampleBoard());
 
-  // Notes drawer
   const [notesOpen, setNotesOpen] = useState(false);
   const [activePlayerId, setActivePlayerId] = useState(null);
 
-  // Paste modal
   const [pasteOpen, setPasteOpen] = useState(false);
   const [pasteText, setPasteText] = useState("");
 
@@ -100,9 +87,7 @@ export default function App() {
     localStorage.setItem("rookie_theme", theme);
   }, [theme]);
 
-  useEffect(() => {
-    saveBoard(board);
-  }, [board]);
+  useEffect(() => { saveBoard(board); }, [board]);
 
   useEffect(() => {
     if (!toast) return;
@@ -111,11 +96,10 @@ export default function App() {
   }, [toast]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(ACTIVE_TAB_KEY, tab);
-    } catch {}
+    try { localStorage.setItem(ACTIVE_TAB_KEY, tab); } catch {}
   }, [tab]);
 
+  /* ─── handlers (identical to previous version) ─── */
   const updateBoard = (next) => setBoard(next);
 
   const updateTier = (tierId, patch) => {
@@ -132,21 +116,16 @@ export default function App() {
         setToast("Need at Least One Tier");
         return b;
       }
-      // Move players to previous tier (or next if first)
       const idx = b.tiers.findIndex((t) => t.id === tierId);
       if (idx < 0) return b;
-
       const targetIdx = idx > 0 ? idx - 1 : 1;
       const tierToDelete = b.tiers[idx];
       const targetTier = b.tiers[targetIdx];
-
       const newTiers = b.tiers
         .filter((t) => t.id !== tierId)
         .map((t) => ({ ...t, playerIds: [...t.playerIds] }));
-
       const tgt = newTiers.find((t) => t.id === targetTier.id);
       if (tgt) tgt.playerIds.push(...tierToDelete.playerIds);
-
       return { ...b, tiers: newTiers, updatedAt: Date.now() };
     });
     setToast("Tier Deleted");
@@ -174,7 +153,6 @@ export default function App() {
       tags: [],
       posMeta: { ZAP: "", Category: "", RP: "" },
     };
-
     setBoard((b) => ({
       ...b,
       players: { ...b.players, [pid]: newPlayer },
@@ -201,12 +179,10 @@ export default function App() {
     setBoard((b) => {
       const newPlayers = { ...b.players };
       delete newPlayers[playerId];
-
       const newTiers = b.tiers.map((t) => ({
         ...t,
         playerIds: t.playerIds.filter((id) => id !== playerId),
       }));
-
       return { ...b, players: newPlayers, tiers: newTiers, updatedAt: Date.now() };
     });
     setToast("Player Removed");
@@ -257,7 +233,7 @@ export default function App() {
     }
   };
 
-    const doCopyText = async () => {
+  const doCopyText = async () => {
     try {
       const ok = await copyText(formatBoardText(board));
       setToast(ok ? "Copied Text Board" : "Copy Failed");
@@ -287,6 +263,27 @@ export default function App() {
     setToast("Reset Board");
   };
 
+  /* ─── derived: tab counts for the new Tabs design ─── */
+  const tabCounts = useMemo(() => {
+    const counts = {
+      [TAB_BIG]: 0,
+      [TAB_QB]: 0,
+      [TAB_RB]: 0,
+      [TAB_WR]: 0,
+      [TAB_TE]: 0,
+    };
+    for (const t of board.tiers) {
+      for (const pid of t.playerIds) {
+        const p = board.players[pid];
+        if (!p) continue;
+        counts[TAB_BIG] += 1;
+        if (Object.prototype.hasOwnProperty.call(counts, p.pos)) counts[p.pos] += 1;
+      }
+    }
+    return counts;
+  }, [board]);
+
+  /* ─── render ─── */
   return (
     <div className="container">
       <Header
@@ -299,43 +296,50 @@ export default function App() {
         onCopy={doCopy}
         onPasteOpen={() => setPasteOpen(true)}
         onResetBoard={resetBoard}
-        activeTab={tab}
       />
 
-    <div className="tabsSticky">
-      <div className="card tabsCard">
-        <div className="row space">
-          <Tabs tabs={tabs} active={tab} onChange={setTab} />
+      <div className="tabs-sticky">
+        <Tabs tabs={tabs} active={tab} onChange={setTab} counts={tabCounts} />
+      </div>
+
+      <div className="body">
+        {tab === TAB_BIG && (
+          <BoardView
+            board={board}
+            onAddTier={addTier}
+            onUpdateBoard={updateBoard}
+            onUpdateTier={updateTier}
+            onDeleteTier={deleteTier}
+            onAddPlayerToTier={addPlayerToTier}
+            onUpdatePlayer={updatePlayer}
+            onDeletePlayer={deletePlayer}
+            onOpenNotes={openNotes}
+          />
+        )}
+
+        {tab === TAB_QB && (
+          <PositionView board={board} position="QB" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
+        )}
+        {tab === TAB_RB && (
+          <PositionView board={board} position="RB" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
+        )}
+        {tab === TAB_WR && (
+          <PositionView board={board} position="WR" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
+        )}
+        {tab === TAB_TE && (
+          <PositionView board={board} position="TE" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
+        )}
+      </div>
+
+      <div className="footer">
+        <div>
+          {(board.yearLabel || "Rookie Board").toUpperCase()} · LOCAL · AUTOSAVED
+        </div>
+        <div className="footer-mid">⌘N PLAYER · ⌘T TIER · ⌘E EXPORT</div>
+        <div>
+          READY <b>●</b>
         </div>
       </div>
-    </div>
-
-      {tab === TAB_BIG && (
-        <BoardView
-          board={board}
-          onAddTier={addTier}
-          onUpdateBoard={updateBoard}
-          onUpdateTier={updateTier}
-          onDeleteTier={deleteTier}
-          onAddPlayerToTier={addPlayerToTier}
-          onUpdatePlayer={updatePlayer}
-          onDeletePlayer={deletePlayer}
-          onOpenNotes={openNotes}
-        />
-      )}
-
-      {tab === TAB_QB && (
-        <PositionView board={board} position="QB" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
-      )}
-      {tab === TAB_RB && (
-        <PositionView board={board} position="RB" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
-      )}
-      {tab === TAB_WR && (
-        <PositionView board={board} position="WR" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
-      )}
-      {tab === TAB_TE && (
-        <PositionView board={board} position="TE" onUpdatePlayer={updatePlayer} onOpenNotes={openNotes} />
-      )}
 
       <Drawer
         open={notesOpen}
@@ -343,42 +347,42 @@ export default function App() {
         onClose={() => setNotesOpen(false)}
       >
         {activePlayer ? (
-          <div style={{ display: "grid", gap: 10 }}>
-            <div className="row" style={{ gap: 10 }}>
-              <span className={`pill ${activePlayer.pos.toLowerCase()}`}>{activePlayer.pos}</span>
+          <>
+            <div>
+              <span className="pv-pill" data-pos={activePlayer.pos}>
+                {activePlayer.pos}
+              </span>
             </div>
-
             <textarea
               className="textarea"
               value={activePlayer.notes ?? ""}
               onChange={(e) => updatePlayer(activePlayer.id, { notes: e.target.value })}
               placeholder="Enter Notes"
             />
-
-            <div className="row space">
-              <button className="btn" onClick={() => setNotesOpen(false)}>Done</button>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button className="btn primary" onClick={() => setNotesOpen(false)}>
+                Done
+              </button>
             </div>
-          </div>
+          </>
         ) : (
-          <div className="muted">No Player Selected</div>
+          <div className="tier-empty">No Player Selected</div>
         )}
       </Drawer>
 
       <Modal open={pasteOpen} title="Paste JSON Board" onClose={() => setPasteOpen(false)}>
-        <div style={{ display: "grid", gap: 10 }}>
-          <div className="muted">
-            Paste a previously copied board (JSON). This will replace your current local board.
-          </div>
-          <textarea
-            className="textarea"
-            value={pasteText}
-            onChange={(e) => setPasteText(e.target.value)}
-            placeholder='{"version":1,...}'
-          />
-          <div className="row space">
-            <button className="btn" onClick={() => setPasteOpen(false)}>Cancel</button>
-            <button className="btn primary" onClick={doPasteApply}>Apply</button>
-          </div>
+        <div className="tier-meta">
+          Paste a previously copied board (JSON). This will replace your current local board.
+        </div>
+        <textarea
+          className="textarea"
+          value={pasteText}
+          onChange={(e) => setPasteText(e.target.value)}
+          placeholder='{"version":1,...}'
+        />
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
+          <button className="btn" onClick={() => setPasteOpen(false)}>Cancel</button>
+          <button className="btn primary" onClick={doPasteApply}>Apply</button>
         </div>
       </Modal>
 

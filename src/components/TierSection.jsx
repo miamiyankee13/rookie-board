@@ -21,43 +21,39 @@ export function TierSection({
 
   return (
     <div
-      className="card"
+      className="tier-panel"
       ref={setDropRef}
-      style={{
-        outline: isOver ? "2px solid rgba(122,162,255,0.35)" : "none",
-        outlineOffset: "2px",
-      }}
+      data-droppable={isOver ? "true" : undefined}
     >
-      <div className="tierHeader">
-        <div className="tierTitleWrap">
-          <div className="tierInputs">
-            <input
-              className="input"
-              style={{ maxWidth: 220, fontWeight: 700 }}
-              value={tier.title}
-              onChange={(e) => onUpdateTier(tier.id, { title: e.target.value })}
-            />
-            <input
-              className="input tierNoteInput"
-              placeholder="Tier Note"
-              value={tier.note ?? ""}
-              onChange={(e) => onUpdateTier(tier.id, { note: e.target.value })}
-            />
-          </div>
+      <div className="tier-head">
+        <div className="tier-tag">
+          <span className="tier-stamp">T{String(tierIndex + 1).padStart(2, "0")}</span>
+          <input
+            className="tier-title-input"
+            value={tier.title}
+            onChange={(e) => onUpdateTier(tier.id, { title: e.target.value })}
+            placeholder="Tier title"
+            aria-label="Tier title"
+          />
         </div>
-
-        <div className="row" style={{ gap: 8 }}>
-          <button className="btn" onClick={() => onAddPlayerToTier(tier.id)}>
-            + Player
-          </button>
-
+        <input
+          className="tier-note-input"
+          placeholder="// tier note…"
+          value={tier.note ?? ""}
+          onChange={(e) => onUpdateTier(tier.id, { note: e.target.value })}
+          aria-label="Tier note"
+        />
+        <div className="tier-actions">
+          <span className="tier-meta">
+            {tier.playerIds.length} {tier.playerIds.length === 1 ? "PROSPECT" : "PROSPECTS"}
+          </span>
           {tierIndex === 0 ? (
-            <button className="btn" onClick={onAddTier} title="Add a Tier">
-              + Tier
+            <button className="btn" onClick={onAddTier} title="Add a tier">
+              ＋ Tier
             </button>
           ) : (
             <button
-              className="btn"
+              className="btn danger"
               onClick={() => onDeleteTier(tier.id)}
               title="Delete tier"
             >
@@ -67,7 +63,15 @@ export function TierSection({
         </div>
       </div>
 
-      <div className="tierBody">
+      <div className="bb-head" aria-hidden>
+        <div className="bb-grip" />
+        <div className="bb-rank num">RNK</div>
+        <div className="bb-pos">POS</div>
+        <div className="bb-name">PLAYER</div>
+        <div className="bb-actions">ACT</div>
+      </div>
+
+      <div className="tier-body">
         <SortableContext items={tier.playerIds} strategy={verticalListSortingStrategy}>
           {tier.playerIds.map((pid) => {
             const p = playersById[pid];
@@ -88,11 +92,17 @@ export function TierSection({
         </SortableContext>
 
         {tier.playerIds.length === 0 && (
-          <div className="muted" style={{ padding: "10px 12px" }}>
-            Empty Tier
-          </div>
+          <div className="tier-empty">// EMPTY TIER</div>
         )}
       </div>
+
+      <button
+        className="add-player"
+        onClick={() => onAddPlayerToTier(tier.id)}
+        title="Add a player to this tier"
+      >
+        ＋ Add Prospect to {(tier.title || "Tier").toUpperCase()}
+      </button>
     </div>
   );
 }
