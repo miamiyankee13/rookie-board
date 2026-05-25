@@ -8,6 +8,7 @@ export function Header({
   onNewTier,
   onExport,
   onImportFile,
+  onCopyText,
   onCopy,
   onPasteOpen,
   onResetBoard,
@@ -68,9 +69,14 @@ export function Header({
           }}
         />
 
+        <button className="btn" onClick={onCopyText} title="Copy Board as Text">
+          Copy Text
+        </button>
+
         <button className="btn" onClick={onCopy} title="Copy JSON Board">
           Copy JSON
         </button>
+
         <button className="btn" onClick={onPasteOpen} title="Paste JSON Board">
           Paste JSON
         </button>

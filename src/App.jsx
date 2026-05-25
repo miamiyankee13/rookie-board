@@ -20,6 +20,67 @@ const TAB_WR = "WR";
 const TAB_TE = "TE";
 const ACTIVE_TAB_KEY = "rookie_active_tab";
 
+function formatBoardText(board) {
+  const tiers = board?.tiers ?? [];
+  const playersById = board?.players ?? {};
+
+  const allPlayerIdsInOrder = tiers.flatMap((t) => t.playerIds ?? []);
+  const posCounters = { QB: 0, RB: 0, WR: 0, TE: 0 };
+  const posRankById = {};
+
+  for (const pid of allPlayerIdsInOrder) {
+    const p = playersById?.[pid];
+    if (!p?.pos) continue;
+    if (!Object.prototype.hasOwnProperty.call(posCounters, p.pos)) continue;
+
+    posCounters[p.pos] += 1;
+    posRankById[pid] = posCounters[p.pos];
+  }
+
+  const lines = [];
+
+  lines.push(board?.yearLabel || "Rookie Board");
+
+  let overallRank = 0;
+
+  for (const tier of tiers) {
+    const playerIds = tier.playerIds ?? [];
+    const tierRows = [];
+
+    for (const pid of playerIds) {
+      overallRank += 1;
+
+      const p = playersById?.[pid];
+      if (!p) continue;
+
+      const name = String(p.name || "Unnamed").trim() || "Unnamed";
+      const pos = p.pos || "";
+      const posRank = posRankById[pid];
+      const posLabel = pos && posRank ? `${pos}${posRank}` : pos || "—";
+
+      tierRows.push(`#${overallRank} ${name} (${posLabel})`);
+    }
+
+    // Keep copied text clean by skipping totally empty tiers.
+    if (!tierRows.length && !tier?.note) continue;
+
+    lines.push("");
+    lines.push(tier.title || "Untitled Tier");
+
+    if (tier?.note) {
+      lines.push(`Note: ${tier.note}`);
+    }
+
+    if (tierRows.length) {
+      lines.push(...tierRows);
+    } else {
+      lines.push("Empty Tier");
+    }
+  }
+
+  return lines.join("\n");
+}
+
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("rookie_theme") || "dark");
   const tabs = useMemo(() => [TAB_BIG, TAB_QB, TAB_RB, TAB_WR, TAB_TE], []);
@@ -206,6 +267,15 @@ export default function App() {
     }
   };
 
+    const doCopyText = async () => {
+    try {
+      const ok = await copyText(formatBoardText(board));
+      setToast(ok ? "Copied Text Board" : "Copy Failed");
+    } catch {
+      setToast("Copy Failed");
+    }
+  };
+
   const doPasteApply = () => {
     try {
       const parsed = JSON.parse(pasteText);
@@ -235,6 +305,7 @@ export default function App() {
         onToggleTheme={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
         onExport={doExport}
         onImportFile={doImportFile}
+        onCopyText={doCopyText}
         onCopy={doCopy}
         onPasteOpen={() => setPasteOpen(true)}
         onResetBoard={resetBoard}
