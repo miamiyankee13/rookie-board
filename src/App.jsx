@@ -61,21 +61,11 @@ function formatBoardText(board) {
       tierRows.push(`#${overallRank} ${name} (${posLabel})`);
     }
 
-    // Keep copied text clean by skipping totally empty tiers.
-    if (!tierRows.length && !tier?.note) continue;
+    if (!tierRows.length) continue;
 
     lines.push("");
     lines.push(tier.title || "Untitled Tier");
-
-    if (tier?.note) {
-      lines.push(`Note: ${tier.note}`);
-    }
-
-    if (tierRows.length) {
-      lines.push(...tierRows);
-    } else {
-      lines.push("Empty Tier");
-    }
+    lines.push(...tierRows);
   }
 
   return lines.join("\n");
