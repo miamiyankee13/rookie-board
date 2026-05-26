@@ -917,9 +917,10 @@ a { color: inherit; }
 }
 .pv-card-field {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 104px auto;
   gap: 8px;
   align-items: center;
+  justify-content: start;
 }
 .pv-card-field-lbl {
   font-size: 10px;
@@ -927,11 +928,6 @@ a { color: inherit; }
   text-transform: uppercase;
   color: var(--dim-2);
   font-weight: 500;
-}
-/* Tighten mobile position-card input widths */
-.pv-card-field {
-  grid-template-columns: 128px auto;
-  justify-content: start;
 }
 
 /* RP has a dot before the input, so reserve equivalent space for other fields */
