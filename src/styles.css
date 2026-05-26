@@ -917,7 +917,7 @@ a { color: inherit; }
 }
 .pv-card-field {
   display: grid;
-  grid-template-columns: 104px auto;
+  grid-template-columns: 96px auto;
   gap: 8px;
   align-items: center;
   justify-content: start;
