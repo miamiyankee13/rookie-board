@@ -17,6 +17,7 @@ export function ZapField({ value = "", onChange, placeholder = "ZAP" }) {
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        maxLength={4}
         inputMode="numeric"
         aria-label="ZAP score"
       />

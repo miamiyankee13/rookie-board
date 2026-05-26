@@ -928,6 +928,33 @@ a { color: inherit; }
   color: var(--dim-2);
   font-weight: 500;
 }
+/* Tighten mobile position-card input widths */
+.pv-card-field {
+  grid-template-columns: 128px auto;
+  justify-content: start;
+}
+
+/* RP has a dot before the input, so reserve equivalent space for other fields */
+.pv-card-field .zap-field,
+.pv-card-field > .input {
+  margin-left: 16px;
+}
+
+/* RP rank: two digits max visually */
+.pv-card-field .rp-field {
+  width: 9ch;
+}
+
+/* ZAP: 97.6 / 100 style values */
+.pv-card-field .zap-field {
+  width: 10ch;
+}
+
+/* Category: cap around the longest normal category label */
+.pv-card-field > .input.sans {
+  width: 22ch;
+  max-width: 100%;
+}
 
 /* ─────────────────────────  DRAWER / MODAL  ───────────────────────── */
 .drawer-overlay {

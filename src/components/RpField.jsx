@@ -26,6 +26,7 @@ export function RpField({ value, onChange }) {
         value={raw}
         onChange={(e) => onChange(e.target.value)}
         placeholder="RP"
+        maxLength={2}
       />
     </div>
   );

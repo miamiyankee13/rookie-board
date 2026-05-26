@@ -120,6 +120,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                       value={r.player.posMeta?.Category ?? ""}
                       onChange={(e) => updateMeta(r.player, "Category", e.target.value)}
                       placeholder="Category"
+                      maxLength={19}
                     />
                   </td>
                 )}
@@ -191,6 +192,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
                         updateMeta(r.player, "Category", e.target.value)
                       }
                       placeholder="Category"
+                      maxLength={19}
                     />
                   </div>
                 )}
