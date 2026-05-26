@@ -526,7 +526,8 @@ a { color: inherit; }
 .bb-row .bb-grip   { grid-area: grip;    padding-left: 18px; }
 .bb-row .bb-rank   { grid-area: rank;    justify-content: flex-end; }
 .bb-row .bb-pos    { grid-area: pos; }
-.bb-row .bb-name   { grid-area: name; }
+.bb-row .bb-name { grid-area: name;}
+.bb-row .bb-name .input.name {max-width: 420px;}
 .bb-row .bb-actions{ grid-area: actions; justify-content: flex-end; gap: 4px; }
 
 /* Position-colored left stripe */
@@ -620,6 +621,9 @@ a { color: inherit; }
       "grip name name    name";
     padding: 8px 10px;
     gap: 6px 8px;
+  }
+  .bb-row .bb-name .input.name {
+  max-width: none;
   }
   .bb-row > div {
     border-right: none;
