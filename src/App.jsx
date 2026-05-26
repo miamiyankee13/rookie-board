@@ -299,7 +299,7 @@ export default function App() {
       />
 
       <div className="tabs-sticky">
-        <Tabs tabs={tabs} active={tab} onChange={setTab} counts={tabCounts} />
+        <Tabs tabs={tabs} active={tab} onChange={setTab} />
       </div>
 
       <div className="body">
