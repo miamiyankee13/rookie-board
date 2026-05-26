@@ -20,7 +20,6 @@ export function RpField({ value, onChange }) {
 
   return (
     <div className="rp-field">
-      <span className={`rp-dot ${tone}`} />
       <input
         className="input"
         value={raw}
@@ -28,6 +27,7 @@ export function RpField({ value, onChange }) {
         placeholder="RP"
         maxLength={2}
       />
+      <span className={`rp-dot ${tone}`} />
     </div>
   );
 }

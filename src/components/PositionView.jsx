@@ -45,7 +45,7 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
     });
 
   return (
-    <div>
+    <div className="position-shell">
       <div className="pos-note" data-pos={position}>
         <div>// EDIT TIER &amp; RANK ON BIG BOARD</div>
         <div className="pos-note-r">

@@ -787,9 +787,9 @@ a { color: inherit; }
 .pv-table col.col-tier   { width: 120px; }
 .pv-table col.col-rank   { width: 64px; }
 .pv-table col.col-player { width: auto; }
-.pv-table col.col-rp     { width: 130px; }
-.pv-table col.col-zap    { width: 140px; }
-.pv-table col.col-cat    { width: auto; }
+.pv-table col.col-rp     { width: 90px; }
+.pv-table col.col-zap    { width: 110px; }
+.pv-table col.col-cat    { width: 220px; }
 .pv-table col.col-notes  { width: 76px; }
 
 .pv-tier {
@@ -843,6 +843,20 @@ a { color: inherit; }
   background: var(--panel);
   border: 1px solid var(--line);
   border-top: none;
+}
+
+/* Tighten desktop position-table input widths */
+.pv-table .rp-field {
+  width: 9ch;
+}
+
+.pv-table .zap-field {
+  width: 10ch;
+}
+
+.pv-table .input.sans {
+  width: 22ch;
+  max-width: 100%;
 }
 
 /* ─────────────────────────  ZAP FIELD  ───────────────────────── */
@@ -947,12 +961,6 @@ a { color: inherit; }
   font-weight: 500;
 }
 
-/* RP has a dot before the input, so reserve equivalent space for other fields */
-.pv-card-field .zap-field,
-.pv-card-field > .input {
-  margin-left: 16px;
-}
-
 /* RP rank: two digits max visually */
 .pv-card-field .rp-field {
   width: 9ch;
@@ -1044,6 +1052,24 @@ a { color: inherit; }
   text-transform: uppercase;
   color: var(--text);
   box-shadow: 0 0 0 1px var(--amber-18), 0 8px 28px rgba(0,0,0,0.35);
+}
+
+/* Keep primary working surfaces from stretching too wide on desktop */
+@media (min-width: 900px) {
+  .body > .tier-panel,
+  .body > .position-shell {
+    width: 100%;
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .position-shell .pos-note,
+  .position-shell .pv-desktop,
+  .position-shell .pv-table,
+  .position-shell .pv-empty {
+    width: 100%;
+  }
 }
 
 /* ─────────────────────────  FOOTER  ───────────────────────── */
