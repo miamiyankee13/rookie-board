@@ -376,6 +376,26 @@ a { color: inherit; }
   .kpi-v { font-size: 18px; }
 }
 
+/* ─────────────────────────  SUMMARY BAND  ───────────────────────── */
+.summary-band {
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px;
+}
+
+.summary-band .kpis {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 520px) {
+  .summary-band {
+    padding: 12px;
+  }
+}
+
 /* ─────────────────────────  TIER PANEL  ───────────────────────── */
 .tier-panel {
   background: var(--panel);

@@ -49,9 +49,6 @@ export function Header({
           <div className="logo" aria-hidden>R</div>
           <div className="brand-text">
             <div className="brand-title">{board?.yearLabel || "Rookie Board"}</div>
-            <div className="brand-meta">
-              {totalProspects} {totalProspects === 1 ? "prospect" : "prospects"} · {tiersCount} {tiersCount === 1 ? "tier" : "tiers"}
-            </div>
           </div>
         </div>
 

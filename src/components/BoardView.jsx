@@ -12,7 +12,6 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { TierSection } from "./TierSection";
-import { KpiStrip } from "./KpiStrip";
 
 /**
  * BoardView — drag/drop wiring is unchanged from the original.
@@ -120,8 +119,6 @@ export function BoardView({
 
   return (
     <>
-      <KpiStrip board={board} />
-
       <DndContext
         sensors={sensors}
         collisionDetection={collisionDetectionStrategy}

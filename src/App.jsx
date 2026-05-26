@@ -6,6 +6,7 @@ import { makeSampleBoard } from "./data/sampleBoard";
 import { defaultTierTitle } from "./data/schema";
 
 import { Header } from "./components/Header";
+import { KpiStrip } from "./components/KpiStrip";
 import { Tabs } from "./components/Tabs";
 import { BoardView } from "./components/BoardView";
 import { PositionView } from "./components/PositionView";
@@ -266,6 +267,10 @@ export default function App() {
         onCopyText={doCopyText}
         onResetBoard={resetBoard}
       />
+
+      <div className="summary-band">
+        <KpiStrip board={board} />
+      </div>
 
       <div className="tabs-sticky">
         <Tabs tabs={tabs} active={tab} onChange={setTab} />
