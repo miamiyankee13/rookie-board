@@ -137,7 +137,19 @@ a { color: inherit; }
   gap: 16px;
   flex-wrap: wrap;
 }
-.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
 .logo {
   width: 32px; height: 32px;
   border: 1px solid var(--amber);
@@ -150,7 +162,9 @@ a { color: inherit; }
   box-shadow: 0 0 0 3px var(--amber-08);
   flex-shrink: 0;
 }
+
 .brand-text { min-width: 0; }
+
 .brand-title {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 700;
@@ -1098,11 +1112,13 @@ a { color: inherit; }
   border-top: 1px solid var(--line);
   background: var(--status-bg);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   gap: 14px;
   font-size: 10px;
   color: var(--dim-2);
   letter-spacing: 0.14em;
+  text-align: center;
   text-transform: uppercase;
   flex-wrap: wrap;
 }

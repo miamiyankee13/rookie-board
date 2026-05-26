@@ -46,9 +46,11 @@ export function Header({
 
       <div className="header">
         <div className="brand">
-          <div className="logo" aria-hidden>R</div>
           <div className="brand-text">
-            <div className="brand-title">{board?.yearLabel || "Rookie Board"}</div>
+            <div className="brand-title-row">
+              <div className="brand-title">{board?.yearLabel || "Rookie Board"}</div>
+              <div className="logo" aria-hidden>R</div>
+            </div>
           </div>
         </div>
 

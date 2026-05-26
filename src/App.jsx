@@ -305,7 +305,9 @@ export default function App() {
         )}
       </div>
 
-      <div className="footer" />
+      <div className="footer">
+        <span>© 2026 Anthony D'Amico. All rights reserved.</span>
+      </div>
 
       <Drawer
         open={notesOpen}
