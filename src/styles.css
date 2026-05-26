@@ -441,7 +441,8 @@ a { color: inherit; }
   border: 1px solid transparent;
   outline: none;
   padding: 3px 6px;
-  width: 100%;
+  width: 32ch;
+  max-width: 100%;
 }
 .tier-note-input:hover { border-color: var(--line-2); }
 .tier-note-input:focus { border-color: var(--amber); color: var(--text); }
@@ -501,7 +502,7 @@ a { color: inherit; }
 /* ─────────────────────────  BIG BOARD ROW  ───────────────────────── */
 .bb-head, .bb-row {
   display: grid;
-  grid-template-columns: 28px 56px 96px 1fr 80px;
+  grid-template-columns: 44px 56px 96px 1fr 80px;
   grid-template-areas: "grip rank pos name actions";
   gap: 0;
 }
@@ -537,7 +538,12 @@ a { color: inherit; }
   min-width: 0;
 }
 .bb-row > div:last-child { border-right: none; }
-.bb-row .bb-grip   { grid-area: grip;    padding-left: 18px; }
+.bb-row .bb-grip {
+  grid-area: grip;
+  padding-left: 0;
+  padding-right: 0;
+  justify-content: center;
+}
 .bb-row .bb-rank   { grid-area: rank;    justify-content: flex-end; }
 .bb-row .bb-pos    { grid-area: pos; }
 .bb-row .bb-name { grid-area: name;}
@@ -564,7 +570,8 @@ a { color: inherit; }
 
 /* Drag handle */
 .grip {
-  width: 18px; height: 18px;
+  width: 28px;
+  height: 28px;
   color: var(--dim-2);
   cursor: grab;
   touch-action: none;
@@ -574,7 +581,11 @@ a { color: inherit; }
 }
 .grip:hover { color: var(--amber); }
 .grip:active { cursor: grabbing; }
-.grip svg { display: block; }
+.grip svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
 
 /* Rank number (amber, mono) */
 .rank {
