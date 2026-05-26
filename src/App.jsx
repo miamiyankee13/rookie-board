@@ -10,7 +10,6 @@ import { Tabs } from "./components/Tabs";
 import { BoardView } from "./components/BoardView";
 import { PositionView } from "./components/PositionView";
 import { Drawer } from "./components/Drawer";
-import { Modal } from "./components/Modal";
 import { Toast } from "./components/Toast";
 
 const TAB_BIG = "Big Board";
@@ -78,9 +77,6 @@ export default function App() {
 
   const [notesOpen, setNotesOpen] = useState(false);
   const [activePlayerId, setActivePlayerId] = useState(null);
-
-  const [pasteOpen, setPasteOpen] = useState(false);
-  const [pasteText, setPasteText] = useState("");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme === "light" ? "light" : "dark");
@@ -224,37 +220,12 @@ export default function App() {
     }
   };
 
-  const doCopy = async () => {
-    try {
-      const ok = await copyText(JSON.stringify(board));
-      setToast(ok ? "Copied JSON Board" : "Copy Failed");
-    } catch {
-      setToast("Copy Failed");
-    }
-  };
-
   const doCopyText = async () => {
     try {
       const ok = await copyText(formatBoardText(board));
       setToast(ok ? "Copied Text Board" : "Copy Failed");
     } catch {
       setToast("Copy Failed");
-    }
-  };
-
-  const doPasteApply = () => {
-    try {
-      const parsed = JSON.parse(pasteText);
-      if (!parsed || parsed.version !== 1 || !parsed.tiers || !parsed.players) {
-        setToast("Invalid JSON");
-        return;
-      }
-      setBoard({ ...parsed, updatedAt: Date.now() });
-      setPasteOpen(false);
-      setPasteText("");
-      setToast("Pasted JSON Board");
-    } catch {
-      setToast("Invalid JSON");
     }
   };
 
@@ -293,8 +264,6 @@ export default function App() {
         onExport={doExport}
         onImportFile={doImportFile}
         onCopyText={doCopyText}
-        onCopy={doCopy}
-        onPasteOpen={() => setPasteOpen(true)}
         onResetBoard={resetBoard}
       />
 
@@ -361,22 +330,6 @@ export default function App() {
           <div className="tier-empty">No Player Selected</div>
         )}
       </Drawer>
-
-      <Modal open={pasteOpen} title="Paste JSON Board" onClose={() => setPasteOpen(false)}>
-        <div className="tier-meta">
-          Paste a previously copied board (JSON). This will replace your current local board.
-        </div>
-        <textarea
-          className="textarea"
-          value={pasteText}
-          onChange={(e) => setPasteText(e.target.value)}
-          placeholder='{"version":1,...}'
-        />
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
-          <button className="btn" onClick={() => setPasteOpen(false)}>Cancel</button>
-          <button className="btn primary" onClick={doPasteApply}>Apply</button>
-        </div>
-      </Modal>
 
       <Toast message={toast} />
     </div>

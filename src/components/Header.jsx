@@ -12,8 +12,6 @@ export function Header({
   onExport,
   onImportFile,
   onCopyText,
-  onCopy,
-  onPasteOpen,
   onResetBoard,
 }) {
   const fileRef = useRef(null);
@@ -83,12 +81,6 @@ export function Header({
 
           <button className="btn" onClick={onCopyText} title="Copy board as text">
             Copy Text
-          </button>
-          <button className="btn" onClick={onCopy} title="Copy board as JSON">
-            Copy JSON
-          </button>
-          <button className="btn" onClick={onPasteOpen} title="Paste a JSON board">
-            Paste JSON
           </button>
           <button className="btn" onClick={onResetBoard} title="Reset local board">
             Reset
