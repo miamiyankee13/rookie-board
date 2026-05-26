@@ -362,7 +362,15 @@ a { color: inherit; }
 .kpi-pos[data-p="TE"] { color: var(--pos-te); }
 .kpi-foot { font-size: 10px; color: var(--dim-2); letter-spacing: 0.12em; }
 
-@media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) {
+  .kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kpis .kpi:last-child {
+    grid-column: 1 / -1;
+  }
+}
 @media (max-width: 360px) {
   .kpi { padding: 10px 12px; }
   .kpi-v { font-size: 18px; }
