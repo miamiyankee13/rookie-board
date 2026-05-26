@@ -42,9 +42,7 @@ export function Header({
           <span className="pulse" />
           <b>LIVE</b> · LOCAL · AUTOSAVED
         </div>
-        <div className="statusbar-workspace">
-          Workspace · SCOUTING / PROSPECTS
-        </div>
+        <div className="statusbar-workspace" />
         <div className="statusbar-clock">UPDATED · {String(updatedLabel).toUpperCase()}</div>
       </div>
 

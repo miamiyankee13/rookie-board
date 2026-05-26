@@ -9,7 +9,7 @@ export function defaultTierTitle(index) {
  * {
  *  version: 1,
  *  boardId: string,
- *  yearLabel: string, // "2026 Rookie Class"
+ *  yearLabel: string, // "Rookie Class"
  *  updatedAt: number,
  *  tiers: [
  *    { id, title, note, playerIds: [id, ...] }

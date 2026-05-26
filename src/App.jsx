@@ -331,15 +331,7 @@ export default function App() {
         )}
       </div>
 
-      <div className="footer">
-        <div>
-          {(board.yearLabel || "Rookie Board").toUpperCase()} · LOCAL · AUTOSAVED
-        </div>
-        <div className="footer-mid">⌘N PLAYER · ⌘T TIER · ⌘E EXPORT</div>
-        <div>
-          READY <b>●</b>
-        </div>
-      </div>
+      <div className="footer" />
 
       <Drawer
         open={notesOpen}

@@ -44,21 +44,6 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
       posMeta: { ...(player.posMeta ?? {}), [key]: value },
     });
 
-  const legend = showRP ? (
-    <span>
-      RP RANK ·
-      <span style={{ marginLeft: 6 }}>
-        <span className="pos-legend-dot elite" /> ELITE ≤5
-      </span>
-      <span style={{ marginLeft: 12 }}>
-        <span className="pos-legend-dot solid" /> SOLID ≤15
-      </span>
-      <span style={{ marginLeft: 12 }}>
-        <span className="pos-legend-dot depth" /> DEPTH 16+
-      </span>
-    </span>
-  ) : null;
-
   return (
     <div>
       <div className="pos-note" data-pos={position}>
@@ -67,7 +52,6 @@ export function PositionView({ board, position, onUpdatePlayer, onOpenNotes }) {
           <span>
             <b>{rows.length}</b> {position} ON BOARD
           </span>
-          {legend}
         </div>
       </div>
 

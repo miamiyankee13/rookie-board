@@ -5,27 +5,27 @@ import React from "react";
  *   #1–5   = elite (green)
  *   #6–15  = solid (amber)
  *   #16+   = depth (rose)
- * Empty / non-numeric value = neutral dim dot.
  */
-export function RpField({ value = "", onChange, placeholder = "rank" }) {
-  const n = parseInt(value, 10);
-  let cls = "";
-  if (Number.isFinite(n) && n > 0) {
-    if (n <= 5) cls = "elite";
-    else if (n <= 15) cls = "solid";
-    else cls = "depth";
+export function RpField({ value, onChange }) {
+  const raw = value ?? "";
+  const n = Number(raw);
+
+  let tone = "depth";
+
+  if (raw !== "" && Number.isFinite(n)) {
+    if (n <= 5) tone = "elite";
+    else if (n <= 15) tone = "solid";
+    else tone = "depth";
   }
 
   return (
     <div className="rp-field">
-      <span className={`rp-dot ${cls}`} aria-hidden />
+      <span className={`rp-dot ${tone}`} />
       <input
         className="input"
-        value={value ?? ""}
+        value={raw}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        inputMode="numeric"
-        aria-label="Reception Perception rank"
+        placeholder="RP"
       />
     </div>
   );

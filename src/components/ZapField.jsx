@@ -5,7 +5,7 @@ import React from "react";
  * The bar is derived from whatever you type; if the value
  * isn't a number, the bar shows empty.
  */
-export function ZapField({ value = "", onChange, placeholder = "0–100" }) {
+export function ZapField({ value = "", onChange, placeholder = "ZAP" }) {
   const n = parseFloat(value);
   const hasValue = Number.isFinite(n);
   const pct = hasValue ? Math.min(100, Math.max(0, n)) : 0;

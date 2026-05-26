@@ -22,13 +22,6 @@ export function KpiStrip({ board }) {
     }
   }
 
-  const lastEdit = (() => {
-    if (!board?.updatedAt) return "—";
-    const d = new Date(board.updatedAt);
-    if (Number.isNaN(d.getTime())) return "—";
-    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-  })();
-
   return (
     <div className="kpis">
       <div className="kpi">
@@ -51,11 +44,6 @@ export function KpiStrip({ board }) {
           ))}
         </div>
         <span className="kpi-foot">DEPTH</span>
-      </div>
-      <div className="kpi">
-        <span className="kpi-lbl">Last Edit</span>
-        <div className="kpi-v small">{lastEdit}</div>
-        <span className="kpi-foot">AUTOSAVED · LOCAL</span>
       </div>
     </div>
   );
