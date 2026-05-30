@@ -25,11 +25,12 @@
   --cyan:        #5bc6d6;
   --rose:        #e26a6a;
   --ok:          #7bc28b;
+  --orange:      #c97832;
 
   --pos-qb: var(--rose);
   --pos-rb: var(--ok);
   --pos-wr: var(--cyan);
-  --pos-te: var(--amber);
+  --pos-te: var(--orange);
 
   --amber-08:  rgba(224,168,59,0.08);
   --amber-18:  rgba(224,168,59,0.18);
@@ -58,6 +59,7 @@
   --cyan:        #1d6f80;
   --rose:        #a8351f;
   --ok:          #2f7d3f;
+  --orange:      #b85f12;
 
   --amber-08:  rgba(166,118,15,0.10);
   --amber-18:  rgba(166,118,15,0.24);
@@ -281,14 +283,26 @@ a { color: inherit; }
   position: relative;
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
+  transition: color 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
 }
 .tab .tab-count { font-size: 10px; color: var(--dim-2); }
+.tab-big-board { --tab-accent: var(--amber); }
+.tab-qb        { --tab-accent: var(--pos-qb); }
+.tab-rb        { --tab-accent: var(--pos-rb); }
+.tab-wr        { --tab-accent: var(--pos-wr); }
+.tab-te        { --tab-accent: var(--pos-te); }
+
 .tab[data-active="true"] {
-  color: var(--amber);
-  border-bottom-color: var(--amber);
-  text-shadow: 0 0 12px var(--amber-18);
+  color: var(--tab-accent, var(--amber));
+  border-bottom-color: var(--tab-accent, var(--amber));
+  text-shadow: 0 0 12px color-mix(in oklab, var(--tab-accent, var(--amber)) 30%, transparent);
 }
-.tab[data-active="true"] .tab-count { color: var(--amber); opacity: 0.8; }
+
+.tab[data-active="true"] .tab-count {
+  color: var(--tab-accent, var(--amber));
+  opacity: 0.8;
+}
+
 .tab[data-active="true"]::before {
   content: '';
   position: absolute;
@@ -296,11 +310,17 @@ a { color: inherit; }
   transform: translateX(-50%);
   width: 4px; height: 4px;
   border-radius: 50%;
-  background: var(--amber);
-  box-shadow: 0 0 8px var(--amber);
+  background: var(--tab-accent, var(--amber));
+  box-shadow: 0 0 8px var(--tab-accent, var(--amber));
 }
-.tab:hover { color: var(--text); }
-.tab:active { transform: translateY(0); }
+.tab:hover {
+  color: var(--text);
+}
+
+.tab[data-active="true"]:hover {
+  color: var(--tab-accent, var(--amber));
+}
+.tab:active { transform: translateY(1px); }
 
 @media (max-width: 520px) {
   .tabs { padding: 0 12px; }
@@ -415,14 +435,6 @@ a { color: inherit; }
   background: var(--panel);
   border: 1px solid var(--line);
   position: relative;
-}
-.tier-panel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: linear-gradient(180deg, var(--amber), transparent 70%);
-  pointer-events: none;
 }
 .tier-panel[data-droppable="true"] { outline: 2px solid var(--amber-18); outline-offset: 2px; }
 
