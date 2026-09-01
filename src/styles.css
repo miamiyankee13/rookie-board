@@ -828,7 +828,6 @@ a { color: inherit; }
 }
 .pv-table td:last-child { border-right: none; }
 .pv-table tr:last-child td { border-bottom: none; }
-.pv-table tr:hover td { background: var(--panel-3); }
 
 .pv-table col.col-tier   { width: 120px; }
 .pv-table col.col-rank   { width: 64px; }
